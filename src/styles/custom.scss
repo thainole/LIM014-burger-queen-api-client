@@ -1,0 +1,16 @@
+// Revisar el archivo node_modules\bootstrap\scss\_variables.scss
+// @import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+$container-max-widths: (
+  sm: 540px,
+  md: 780px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+);
+// #eceae2 #f1f0ea
+$light: #f1f0ea;
+
+
+
+@import "../../node_modules/bootstrap/scss/bootstrap.scss"
