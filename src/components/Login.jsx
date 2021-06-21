@@ -1,5 +1,5 @@
 import React from 'react'
-import burger from './img/burger.png'
+import burger from '../img/burger.png'
 
 export const Login = () => {
   return (
