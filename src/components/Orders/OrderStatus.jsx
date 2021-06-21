@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const ServerStatusOrder = () => {
+export const OrderStatus = () => {
   return (
     <div>
         <h2>server satus</h2>

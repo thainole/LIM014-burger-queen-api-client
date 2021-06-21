@@ -4276,6 +4276,7 @@ fieldset:disabled .btn {
 .nav-link {
   display: block;
   padding: 0.5rem 1rem;
+  color: #fff;
   text-decoration: none;
   -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
@@ -4286,6 +4287,10 @@ fieldset:disabled .btn {
     -webkit-transition: none;
     transition: none;
   }
+}
+
+.nav-link:hover, .nav-link:focus {
+  color: #fff;
 }
 
 .nav-link.disabled {

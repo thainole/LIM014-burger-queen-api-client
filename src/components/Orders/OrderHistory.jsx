@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const ServerHistoryOrder = () => {
+export const OrderHistory = () => {
   return (
     <div>
         <h2>server history</h2>

@@ -5,8 +5,7 @@ import {
   Route,
 } from "react-router-dom";
 import {Login} from './components/Login';
-import {ServerView} from './components/Server/ServerView';
-import { ChefView } from './components/Chef/ChefView';
+import {NavBar} from './components/NavBar';
 import { AdminView} from './components/Admin/AdminView';
 //import {Home} from './components/Home/Home'
 
@@ -16,10 +15,8 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={Login} />
-          <Route exact path="/mesero" component={ServerView} />
-          <Route exact path="/chef" component={ChefView} />
-          <Route exact path="/admin" component={AdminView} />
-          {/* <Route path="/home" component={Home}/> */}
+          <Route path="/pedidos" component={NavBar} />
+          <Route path="/admin" component={AdminView} />
         </Switch>
       </Router>
     </>

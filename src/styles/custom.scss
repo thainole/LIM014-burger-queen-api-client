@@ -8,6 +8,9 @@ $container-max-widths: (
   xl: 1140px,
   xxl: 1320px
 );
+$white:    #fff !default;
+$nav-link-color: null $white;
+$nav-link-hover-color: null $white;
 // #eceae2 #f1f0ea
 $light: #f1f0ea;
 

@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const ServerTakeOrder = () => {
+export const TakeOrder = () => {
   return (
-    <div>
+    <section>
       <h2>server toma de orden</h2>
-    </div>
+    </section>
   )
 }
