@@ -17,8 +17,13 @@ export const Login = () => {
   const handleSubmit = async(e) => {
     e.preventDefault();
     console.log(user);
-    const response = await getToken(user);
-    changingPage(response);
+    try {
+      const response = await getToken(user);
+      changingPage(response);
+    }
+    catch (err) {
+      console.log(err)
+    }
   };
 
   const changingPage = (response) => {
