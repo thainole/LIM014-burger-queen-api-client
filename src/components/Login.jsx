@@ -9,16 +9,14 @@ export const Login = () => {
 
   let history = useHistory();
 
-  const response = postRequest(email, password);
-
   const handleSubmit = async(e) => {
     e.preventDefault();
     console.log(email, password);
-    await response;
-    await handleClick();
+    const response = await postRequest(email, password);
+    changingPage(response);
   };
 
-  const handleClick = () => {
+  const changingPage = (response) => {
     response === "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGM5MmMxM2NjNTMzNTBmMzkwNDk5ZGQiLCJlbWFpbCI6ImFkbWluQGxvY2FsaG9zdCIsInJvbGVzIjp7ImFkbWluIjp0cnVlfSwiaWF0IjoxNjIzNzk2ODg0LCJleHAiOjE2MjM4MDA0ODR9.8tDX3i4afFU7TAFfvg11ngvIJOYgZZ2oQDpLu0xYrpg"
     ? history.push("/admin")
     : history.push("/pedidos")
