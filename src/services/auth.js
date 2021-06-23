@@ -1,15 +1,12 @@
 // import axios from "axios";
 const axios = require('axios');
+const jwtDecode = require('jwt-decode')
 
-export const postRequest = async (email, password) => {
-  const requestToken = { 
-      email: email,
-      password: password,
-  }
+export const getToken = async (requestToken) => {
   try {
       const resp = await axios.post('http://localhost:3001/auth', requestToken);
-      console.log(resp.data)
-      return resp.data;
+      const decodeToken = jwtDecode.default(resp.data.token)
+      return decodeToken;
   } catch (err) {
       console.error(err);
   }

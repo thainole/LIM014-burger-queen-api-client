@@ -1,23 +1,28 @@
 import React from "react";
 import burger from "../img/burger.png";
-import {postRequest} from '../services/auth.js';
+import { getToken } from '../services/auth.js';
 import { useHistory } from "react-router-dom";
 
 export const Login = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
+  const user = {
+    email: email,
+    password: password,
+  }
+
   let history = useHistory();
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(email, password);
-    const response = await postRequest(email, password);
+    console.log(user);
+    const response = await getToken(user);
     changingPage(response);
   };
 
   const changingPage = (response) => {
-    response === "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2MGM5MmMxM2NjNTMzNTBmMzkwNDk5ZGQiLCJlbWFpbCI6ImFkbWluQGxvY2FsaG9zdCIsInJvbGVzIjp7ImFkbWluIjp0cnVlfSwiaWF0IjoxNjIzNzk2ODg0LCJleHAiOjE2MjM4MDA0ODR9.8tDX3i4afFU7TAFfvg11ngvIJOYgZZ2oQDpLu0xYrpg"
+    response.roles.admin === true
     ? history.push("/admin")
     : history.push("/pedidos")
   }
