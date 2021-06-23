@@ -15,25 +15,25 @@ export const NavBar = () => {
   let { path, url } = useRouteMatch();
   return (
     <div>
-      <nav className="navbar-expand-md navbar-light bg-secondary d-flex">
-        <img className="me-auto" src={burger} alt="burger" width="40" height="34" />
-        <ul className="nav nav-tabs justify-content-end">
-          <li className="nav-item">
+      <nav className="navbar-expand-md navbar-light bg-danger d-flex">
+        <img className="me-auto ms-lg-2 mt-lg-2 ms-md-1 mt-md-1" src={burger} alt="burger" width="40" height="34" />
+        <ul className="nav nav-tabs justify-content-end p-0.5">
+          <li className="nav-item p-lg-1">
             <NavLink to={`${url}/hacer-pedidos`} className="nav-link" aria-current="page">
               Hacer pedido
             </NavLink>
           </li>
-          <li className="nav-item">
+          <li className="nav-item p-lg-1">
             <NavLink to={`${url}/cocina`} className="nav-link">
               Cocina
             </NavLink>
           </li>
-          <li className="nav-item">
+          <li className="nav-item p-lg-1">
             <NavLink to={`${url}/estado`} className="nav-link">
               Estado
             </NavLink>
           </li>
-          <li className="nav-item">
+          <li className="nav-item p-lg-1">
             <NavLink to={`${url}/historial`} className="nav-link">
               Historial
             </NavLink>
