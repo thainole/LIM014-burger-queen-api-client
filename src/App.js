@@ -5,9 +5,8 @@ import {
   Route,
 } from "react-router-dom";
 import {Login} from './components/Login';
-import {NavBar} from './components/NavBar';
-import { AdminView} from './components/Admin/AdminView';
-//import {Home} from './components/Home/Home'
+import {OrdersNavBar} from './components/Orders/OrdersNavBar';
+import {AdminNavBar} from './components/Admin/AdminNavBar';
 
 function App() {
   return (
@@ -15,8 +14,8 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={Login} />
-          <Route path="/pedidos" component={NavBar} />
-          <Route path="/admin" component={AdminView} />
+          <Route path="/pedidos" component={OrdersNavBar} />
+          <Route path="/admin" component={AdminNavBar} />
         </Switch>
       </Router>
     </>

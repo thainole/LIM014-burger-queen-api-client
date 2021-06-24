@@ -1,9 +1,9 @@
 import React from 'react'
 
-export const AdminView = () => {
+export const AdminUsers = () => {
   return (
     <div>
-      <h2>hola admin</h2> 
+      hola soy admin users
     </div>
   )
 }
