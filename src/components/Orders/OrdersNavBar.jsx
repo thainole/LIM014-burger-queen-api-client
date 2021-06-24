@@ -1,18 +1,15 @@
-import React from 'react';
-import {
-  NavLink,
-  Switch,
-  Route,
-  useRouteMatch,
-} from "react-router-dom";
-import { TakeOrder } from './Orders/TakeOrder';
-import { OrderStatus } from './Orders/OrderStatus';
-import { OrderHistory } from './Orders/OrderHistory';
-import { ChefView } from './Orders/ChefView';
-import burger from '../img/burger.png'
+import React from 'react'
+import { NavLink, Switch, Route, useRouteMatch } from "react-router-dom";
+import { TakeOrder } from './TakeOrder';
+import { OrderStatus } from './OrderStatus';
+import { OrderHistory } from './OrderHistory';
+import { ChefView } from './ChefView';
+import burger from '../../img/burger.png'
 
-export const NavBar = () => {
+export const OrdersNavBar = () => {
+
   let { path, url } = useRouteMatch();
+
   return (
     <div>
       <nav className="navbar-expand-md navbar-light bg-danger d-flex">
@@ -38,6 +35,11 @@ export const NavBar = () => {
               Historial
             </NavLink>
           </li>
+          <li className="nav-item p-lg-1">
+            <NavLink to="/" className="nav-link">
+              Salir
+            </NavLink>
+          </li>
         </ul>
       </nav>
 
@@ -57,6 +59,7 @@ export const NavBar = () => {
         <Route exact path={`${path}/historial`}>
           <OrderHistory />
         </Route>
+        
       </Switch>
     </div>
   )

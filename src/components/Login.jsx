@@ -28,8 +28,8 @@ export const Login = () => {
 
   const changingPage = (response) => {
     response.roles.admin === true
-    ? history.push("/admin")
-    : history.push("/pedidos")
+    ? history.push("/admin/usuarios")
+    : history.push("/pedidos/hacer-pedidos")
   }
 
   return (

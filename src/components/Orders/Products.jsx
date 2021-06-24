@@ -3,16 +3,16 @@ import { productsRequest } from '../../services/products'
 
 export const Products = () => {
 
-  const [state, setState] = React.useState([])
+  const [products, setProducts] = React.useState([])
 
-   productsRequest().then(res => setState(res.products))
+  productsRequest().then(res => setProducts(res.products))
 
   
   return (
     <section className="containerProd">
       <h5>Hi soy productitos</h5>
        <article className="d-flex flexWrap ">
-          {state.map((product) => (
+          {products.map((product) => (
             <div className="card cardsWidth m-2" width="9rem" key={product.id}>  
               <img src={product.image} className="card-img-top imgCardSize" alt="" />
               <div className="card-body p-1 text-center">
