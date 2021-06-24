@@ -1,5 +1,6 @@
 import React from 'react'
 import { productsRequest } from '../../services/products'
+import { AdminEachProduct } from './AdminEachProduct'
 
 export const AdminProducts = () => {
 
@@ -27,17 +28,8 @@ export const AdminProducts = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
-            <tr>
-              <td>{product.id}</td>
-              <td>{product.name}</td>
-              <td>{product.type}</td>
-              <td>{product.price}</td>
-              {/* <td>{product.image}</td> */}
-              <td>{product.dateEntry}</td>
-              <td>🗑</td>
-              <td>✏</td>
-            </tr>
+          {products.map((product, index) => (
+            <AdminEachProduct product={product} key={index}/>
           ))}
         </tbody>
       </table>
