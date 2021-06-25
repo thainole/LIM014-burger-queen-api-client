@@ -1,25 +1,24 @@
 import React from 'react'
-import { productsRequest } from '../../services/products'
-import { AdminEachProduct } from './AdminEachProduct'
-import { ButtonFn } from './ButtonFn'
+// import { productsRequest } from '../../services/products'
+// import { AdminEachProduct } from './AdminEachProduct'
+import { ModalAddProduct } from './ModalAddProduct'
 
 export const AdminProducts = () => {
 
-  const [products, setProducts] = React.useState([])
+  /* const [products, setProducts] = React.useState([])
 
-  productsRequest().then(res => setProducts(res.products))
+  productsRequest().then(res => setProducts(res.products)) */
 
   return (
     <section className="container-fluid p-3 w-100 col">
       <h3 className="w-100 text-center ">Lista de productos</h3>
-      <ButtonFn />
       <div className="d-flex w-100 justify-content-end">
-        <button className="btn btn-danger me-3">Agregar producto</button>
+        <ModalAddProduct />
       </div>
       <table className="table table-sm table-hover w-100 mt-3 mx-2">
         <thead>
           <tr>
-            <th>Id</th>
+            {/* <th>Id</th> */}
             <th>Nombre</th>
             <th>Tipo</th>
             <th>Precio</th>
@@ -29,11 +28,11 @@ export const AdminProducts = () => {
             <th></th>
           </tr>
         </thead>
-        <tbody>
+        {/* <tbody>
           {products.map((product, index) => (
             <AdminEachProduct product={product} key={index}/>
           ))}
-        </tbody>
+        </tbody> */}
       </table>
     </section>
   )
