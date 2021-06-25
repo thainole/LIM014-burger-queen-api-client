@@ -1,5 +1,7 @@
 import React from 'react'
 import { productsRequest } from '../../services/products'
+import { AdminEachProduct } from './AdminEachProduct'
+import { ButtonFn } from './ButtonFn'
 
 export const AdminProducts = () => {
 
@@ -10,6 +12,7 @@ export const AdminProducts = () => {
   return (
     <section className="container-fluid p-3 w-100 col">
       <h3 className="w-100 text-center ">Lista de productos</h3>
+      <ButtonFn />
       <div className="d-flex w-100 justify-content-end">
         <button className="btn btn-danger me-3">Agregar producto</button>
       </div>
@@ -27,17 +30,8 @@ export const AdminProducts = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
-            <tr>
-              <td>{product.id}</td>
-              <td>{product.name}</td>
-              <td>{product.type}</td>
-              <td>{product.price}</td>
-              {/* <td>{product.image}</td> */}
-              <td>{product.dateEntry}</td>
-              <td>🗑</td>
-              <td>✏</td>
-            </tr>
+          {products.map((product, index) => (
+            <AdminEachProduct product={product} key={index}/>
           ))}
         </tbody>
       </table>

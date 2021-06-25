@@ -33,36 +33,38 @@ export const Login = () => {
   }
 
   return (
-    <section className="container row d-flex align-items-center vh-100 mx-auto bg-light text-dark">
-      <figure className="col ">
-        <img src={burger} className="img-fluid" alt="burger" />
-      </figure>
-      <form className="col text-center" onSubmit={(e) => handleSubmit(e)}>
-        <h1> Burger Queen </h1>
-        <h6 className="mt-4 mb-3">Por favor, ingrese sus datos</h6>
-        <div className="mb-3 px-3">
-          <input
-            type="email"
-            className="form-control"
-            placeholder="E-mail"
-            aria-describedby="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="mb-3 px-3">
-          <input
-            type="password"
-            className="form-control"
-            placeholder="Contraseña"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit" className="btn btn-danger">
-          Acceder
-        </button>
-      </form>
-    </section>
+    <main className="vw-100 vh-100 bg-light d-flex align-items-center">   
+      <section className="container row d-flex align-items-center mx-auto text-dark flexWrap">
+        <figure className="col ">
+          <img src={burger} className="img-fluid" alt="burger" />
+        </figure>
+        <form className="col text-center" onSubmit={(e) => handleSubmit(e)}>
+          <h1> Burger Queen </h1>
+          <h6 className="mt-4 mb-3">Por favor, ingrese sus datos</h6>
+          <div className="mb-3 px-3">
+            <input
+              type="email"
+              className="form-control"
+              placeholder="E-mail"
+              aria-describedby="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="mb-3 px-3">
+            <input
+              type="password"
+              className="form-control"
+              placeholder="Contraseña"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <button type="submit" className="btn btn-danger">
+            Acceder
+          </button>
+        </form>
+      </section>
+    </main>
   );
 };
