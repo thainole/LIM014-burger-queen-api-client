@@ -21,7 +21,7 @@ export const ModalAddUsers = () => {
           <Form>
             <Form.Group className="mb-3 d-inline-flex align-items-center w-100" controlId="exampleForm.ControlInput1">
               <Form.Label className="me-2">Email: </Form.Label>
-              <Form.Control size="sm" type="email"/>
+              <Form.Control size="sm" type="email" />
             </Form.Group>
             <Form.Group className="mb-3 d-inline-flex align-items-center w-100" controlId="exampleForm.ControlInput2">
               <Form.Label className="me-2">Contraseña: </Form.Label>
