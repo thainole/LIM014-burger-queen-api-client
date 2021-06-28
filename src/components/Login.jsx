@@ -27,7 +27,8 @@ export const Login = () => {
   };
 
   const changingPage = (response) => {
-    response.roles.admin === true
+    console.log(response)
+    response.userRol.admin === true
     ? history.push("/admin/usuarios")
     : history.push("/pedidos/hacer-pedidos")
   }

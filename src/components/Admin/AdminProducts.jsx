@@ -1,13 +1,27 @@
 import React from 'react'
-// import { productsRequest } from '../../services/products'
-// import { AdminEachProduct } from './AdminEachProduct'
+import { productsRequest } from '../../services/products'
+import { AdminEachProduct } from './AdminEachProduct'
 import { ModalAddProduct } from './ModalAddProduct'
 
 export const AdminProducts = () => {
 
-  /* const [products, setProducts] = React.useState([])
+  const [products, setProducts] = React.useState([])
 
-  productsRequest().then(res => setProducts(res.products)) */
+  const getProducts = async() => {
+    try {
+      const storedToken = localStorage.getItem('token');
+      const response = await productsRequest(storedToken);
+      setProducts(response) ;
+    }
+    catch (err) {
+      console.log(err)
+    }
+  };
+
+  React.useEffect(() => {
+    getProducts();
+  })
+  
 
   return (
     <section className="container-fluid p-3 w-100 col">
@@ -28,11 +42,11 @@ export const AdminProducts = () => {
             <th></th>
           </tr>
         </thead>
-        {/* <tbody>
+        <tbody>
           {products.map((product, index) => (
             <AdminEachProduct product={product} key={index}/>
           ))}
-        </tbody> */}
+        </tbody>
       </table>
     </section>
   )

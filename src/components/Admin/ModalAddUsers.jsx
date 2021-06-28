@@ -29,8 +29,8 @@ export const ModalAddUsers = () => {
             </Form.Group>
             <Form.Group className="mb-3 d-inline-flex align-items-center w-100" controlId="exampleForm.ControlInput2">
               <Form.Label className="me-2">Administrador: </Form.Label>
-              <select class="form-select" size="sm" aria-label="Default select example">
-                <option selected value="false">False</option>
+              <select className="form-select" size="sm" aria-label="Default select example">
+                <option value="false">False</option>
                 <option value="true">True</option>
               </select>
             </Form.Group>

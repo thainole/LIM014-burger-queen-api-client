@@ -3,7 +3,7 @@ import React from 'react'
 export const AdminEachProduct = ({product}) => {
   return (
     <tr>
-      <td>{product.id}</td>
+      {/* <td>{product.id}</td> */}
       <td>{product.name}</td>
       <td>{product.type}</td>
       <td>{product.price}</td>

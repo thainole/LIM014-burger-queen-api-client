@@ -28,8 +28,8 @@ export const ModalAddProduct = () => {
               <Form.Label className="me-4">Precio: </Form.Label>
               <Form.Control className="w-25 me-3" size="sm" type="number" min ="0" />
               <Form.Label className="me-2">Tipo: </Form.Label>
-              <select class="form-select w-50" aria-label="Default select example">
-                <option selected>Seleccionar</option>
+              <select className="form-select w-50" aria-label="Default select example">
+                <option>Seleccionar</option>
                 <option value="1">Desayuno</option>
                 <option value="2">Hamburguesa</option>
                 <option value="3">Acompañamiento</option>
