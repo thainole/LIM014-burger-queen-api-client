@@ -35,13 +35,13 @@ export const Login = () => {
   return (
     <main className="vw-100 vh-100 bg-light d-flex align-items-center">   
       <section className="container row d-flex align-items-center mx-auto text-dark flexWrap">
-        <figure className="col ">
-          <img src={burger} className="img-fluid" alt="burger" />
+        <figure className="col text-center mt-3">
+          <img src={burger} className="img-fluid" alt="burger" width="70%"/>
         </figure>
-        <form className="col text-center" onSubmit={(e) => handleSubmit(e)}>
-          <h1> Burger Queen </h1>
-          <h6 className="mt-4 mb-3">Por favor, ingrese sus datos</h6>
-          <div className="mb-3 px-3">
+        <form className="col text-center my-3 px-4" onSubmit={(e) => handleSubmit(e)}>
+          <h1> BURGER QUEEN </h1>
+          <h6 className="mt-5 mb-4">Por favor, ingrese sus datos</h6>
+          <div className="mb-3 px-3 mb-lg-4 px-lg-5">
             <input
               type="email"
               className="form-control"
@@ -51,7 +51,7 @@ export const Login = () => {
               onChange={(e) => setEmail(e.target.value)}
             />
           </div>
-          <div className="mb-3 px-3">
+          <div className="mb-3 px-3 mb-lg-4 px-lg-5">
             <input
               type="password"
               className="form-control"
