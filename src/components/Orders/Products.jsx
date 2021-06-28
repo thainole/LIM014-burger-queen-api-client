@@ -1,28 +1,49 @@
 import React from 'react'
 import { productsRequest } from '../../services/products'
+import { EachProduct } from './EachProduct'
 
 export const Products = () => {
 
   const [products, setProducts] = React.useState([])
-
   productsRequest().then(res => setProducts(res.products))
 
+  const firstView = products.filter((elem) => elem.type === "Desayuno");
+  const [list, setList] = React.useState(firstView);
+
+  const productsType = (option) => {
+    // eslint-disable-next-line default-case
+    switch (option) {
+      case "Desayuno":
+        const breakfast = products.filter((elem) => elem.type === option);
+        return setList(breakfast);
+      case "Hamburguesas":
+        const burgers = products.filter((elem) => elem.type === option);
+        return setList(burgers);
+      case "Acompañamientos":
+        const sides = products.filter((elem) => elem.type === option);
+        return setList(sides);
+      case "Bebidas":
+        const drinks = products.filter((elem) => elem.type === option);
+        return setList(drinks);
+    }
+  }; 
   
   return (
     <section className="containerProd">
-      <h5>Hi soy productitos</h5>
-       <article className="d-flex flexWrap ">
-          {products.map((product) => (
-            <div className="card cardsWidth m-2" width="9rem" key={product.id}>  
-              <img src={product.image} className="card-img-top imgCardSize" alt="" />
-              <div className="card-body p-1 text-center">
-                <p className="m-auto fw-bold">{product.name}</p>
-                <p className="m-auto">S/. {product.price}</p>
-              </div>
-              <button className="btn btn-danger p-1 m-1">Agregar</button>
-            </div>
-          ))}
-      </article>
+      <nav>
+        <ul className="nav" >
+          <li className="btn me-1 px-2" onClick={() => productsType("Desayuno")}>Desayuno</li>
+          <li className="btn me-1 px-2" onClick={() => productsType("Hamburguesas")}>Hamburguesas</li>
+          <li className="btn me-1 px-2" onClick={() => productsType("Acompañamientos")}>Acompañamientos</li>
+          <li className="btn px-2" onClick={() => productsType("Bebidas")}>Bebidas</li>
+        </ul>
+        <hr className="m-0" />
+      </nav>
+      <article className="d-flex flexWrap ">
+        {list.map((product, index) => (
+          <EachProduct product={product} index={index}/>
+        ))}
+    </article>
     </section>
   )
 }
