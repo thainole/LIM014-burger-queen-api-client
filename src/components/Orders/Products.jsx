@@ -5,7 +5,21 @@ import { EachProduct } from './EachProduct'
 export const Products = () => {
 
   const [products, setProducts] = React.useState([])
-  productsRequest().then(res => setProducts(res.products))
+
+  const getProducts = async() => {
+    try {
+      const storedToken = localStorage.getItem('token');
+      const response = await productsRequest(storedToken);
+      setProducts(response) ;
+    }
+    catch (err) {
+      console.log(err)
+    }
+  };
+
+  React.useEffect(() => {
+    getProducts();
+  })
 
   const firstView = products.filter((elem) => elem.type === "Desayuno");
   const [list, setList] = React.useState(firstView);
