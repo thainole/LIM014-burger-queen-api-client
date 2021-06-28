@@ -1,12 +1,26 @@
 import React from 'react'
 // import { usersRequest } from '../../services/users'
-import {ModalAddUsers} from './ModalAddUsers'
+import {ModalAddUsers} from './ModalAddUsers';
+import {usersRequest} from '../../services/users'
 
 export const AdminUsers = () => {
 
-  /* const [users, setUsers] = React.useState([])
+  const [users, setUsers] = React.useState([])
+  
+  const getUsers = async() => {
+    try {
+      const storedToken = localStorage.getItem('token');
+      const response = await usersRequest(storedToken);
+      setUsers(response) ;
+    }
+    catch (err) {
+      console.log(err)
+    }
+  };
 
-  usersRequest().then(res => setUsers(res.users)) */
+  React.useEffect(() => {
+    getUsers();
+  })
 
   //hacer un useEffect para que no se renderice
 
@@ -27,7 +41,7 @@ export const AdminUsers = () => {
             <th></th>
           </tr>
         </thead>
-        {/* <tbody>
+        <tbody>
           {users.map((user, index) => (
             <tr key={index}>
               <td>{user._id}</td>
@@ -37,7 +51,7 @@ export const AdminUsers = () => {
               <td>✏</td>
           </tr>
           ))}
-        </tbody> */}
+        </tbody>
       </table>
     </section>
     </div>

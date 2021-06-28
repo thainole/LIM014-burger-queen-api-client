@@ -15,7 +15,7 @@ export const productsRequest = async (storedToken) => {
     case 200:
       return resp.data;
     case 401:
-      throw new Error('Inserta un email y contraseña correctos') 
+      throw new Error('Inserta un email y contraseña correctos'); 
     default:
       throw new Error(resp.statusText);
   }
