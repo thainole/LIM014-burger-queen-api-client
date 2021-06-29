@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const AdminEachProduct = ({product}) => {
+export const AdminEachProduct = ({product, deleteProducts, updateProducts}) => {
   return (
     <tr>
       {/* <td>{product.id}</td> */}
@@ -9,8 +9,8 @@ export const AdminEachProduct = ({product}) => {
       <td>{product.price}</td>
       {/* <td>{product.image}</td> */}
       <td>{product.dateEntry}</td>
-      <td>🗑</td>
-      <td>✏</td>
+      <td onClick={()=> deleteProducts(product._id)}>🗑</td>
+      <td onClick={()=> updateProducts(product._id)}>✏</td>
     </tr>
   )
 }

@@ -11,6 +11,7 @@ export const AdminUsers = () => {
       const storedToken = localStorage.getItem('token');
       const response = await usersRequest(storedToken);
       setUsers(response) ;
+
     }
     catch (err) {
       console.log(err)
@@ -21,25 +22,28 @@ export const AdminUsers = () => {
     getUsers();
   }, [])
 
-  const deleteUsers = (id) => {
+  const deleteUsers = async(id) => {
     console.log(id);
     try {
       const storedToken = localStorage.getItem('token');
-      deleteUser(storedToken, id);
-      getUsers();
+      await deleteUser(storedToken, id);
+      await getUsers();
     }
     catch (err) {
       console.log(err)
     }
   }
 
-  
+  // const btnDelete = (id) => {
+  //   cursor: pointer,
+  // }
+
   return (
     <div>
       <section className="container-fluid p-3 w-100 col">
       <h3 className="w-100 text-center ">Lista de usuarios</h3>
       <div className="d-flex w-100 justify-content-end">
-        <ModalAddUsers />
+        <ModalAddUsers getUsers={getUsers}/>
       </div>
       <table className="table table-sm table-hover w-100 mt-3 mx-2">
         <thead>

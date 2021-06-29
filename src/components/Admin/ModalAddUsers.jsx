@@ -2,7 +2,7 @@ import React from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { postUser } from "../../services/users";
 
-export const ModalAddUsers = () => {
+export const ModalAddUsers = ({getUsers}) => {
   const [show, setShow] = React.useState(false);
 
   const handleClose = () => setShow(false);
@@ -20,12 +20,12 @@ export const ModalAddUsers = () => {
     },
   };
 
-  const sendData = async () => {
+  const sendData = async() => {
     console.log(sendNewUser);
     const storedToken = localStorage.getItem("token");
-    const response = await postUser(storedToken, sendNewUser);
-    console.log(response);
+    await postUser(storedToken, sendNewUser);
     handleClose();
+    await getUsers()
   };
   return (
     <>
@@ -66,7 +66,7 @@ export const ModalAddUsers = () => {
                 onChange={(e) => setOption(e.target.value)}
               >
                 <option value="false">False</option> 
-                <option value="true">True</option>
+                <option value="true">True</option>               
               </select>
             </Form.Group>
           </Form>
