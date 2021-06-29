@@ -68,4 +68,4 @@ export const deleteUser = async (storedToken, id) => {
     default:
       throw new Error(resp.statusText);
   } 
-}  
+} 
