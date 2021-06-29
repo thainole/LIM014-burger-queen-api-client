@@ -23,6 +23,11 @@ export const AdminNavBar = () => {
               Administrar productos
             </NavLink>
           </li>
+          <li className="nav-item p-lg-1">
+            <NavLink to="/" className="nav-link">
+              Salir
+            </NavLink>
+          </li>
         </ul>
       </nav>
 
