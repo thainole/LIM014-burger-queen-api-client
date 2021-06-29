@@ -1,5 +1,4 @@
 import React from 'react'
-// import { usersRequest } from '../../services/users'
 import {ModalAddUsers} from './ModalAddUsers';
 import {usersRequest} from '../../services/users'
 
@@ -22,8 +21,7 @@ export const AdminUsers = () => {
     getUsers();
   })
 
-  //hacer un useEffect para que no se renderice
-
+  
   return (
     <div>
       <section className="container-fluid p-3 w-100 col">

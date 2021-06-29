@@ -1,5 +1,6 @@
 import React from 'react'
 import { Modal, Button, Form } from 'react-bootstrap';
+import {postUser} from '../../services/users'
 
 export const ModalAddUsers = () => {
   const [show, setShow] = React.useState(false);
@@ -7,6 +8,25 @@ export const ModalAddUsers = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [option, setOption] = React.useState('');
+
+  const sendNewUser = {
+    email: email,
+    password: password,
+    roles: {
+      admin: option === 'true' ? true : false
+    }
+  }
+
+  const sendData = async () => {
+    console.log(sendNewUser);
+    const storedToken = localStorage.getItem('token');
+    const response = await postUser(storedToken, sendNewUser);
+    console.log(response);
+    handleClose();
+  }
   return (
     <>
       <Button variant="danger" onClick={handleShow}>
@@ -18,18 +38,18 @@ export const ModalAddUsers = () => {
           <Modal.Title>Nuevo producto</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
-            <Form.Group className="mb-3 d-inline-flex align-items-center w-100" controlId="exampleForm.ControlInput1">
+          <Form >
+            <Form.Group className="mb-3 d-inline-flex align-items-center w-100">
               <Form.Label className="me-2">Email: </Form.Label>
-              <Form.Control size="sm" type="email" />
+              <Form.Control size="sm" type="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
             </Form.Group>
-            <Form.Group className="mb-3 d-inline-flex align-items-center w-100" controlId="exampleForm.ControlInput2">
+            <Form.Group className="mb-3 d-inline-flex align-items-center w-100">
               <Form.Label className="me-2">Contraseña: </Form.Label>
-              <Form.Control size="sm" type="password"/>
+              <Form.Control size="sm" type="password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
             </Form.Group>
-            <Form.Group className="mb-3 d-inline-flex align-items-center w-100" controlId="exampleForm.ControlInput2">
+            <Form.Group className="mb-3 d-inline-flex align-items-center w-100">
               <Form.Label className="me-2">Administrador: </Form.Label>
-              <select className="form-select" size="sm" aria-label="Default select example">
+              <select className="form-select" size="sm" aria-label="Default select example" onChange={(e)=>setOption(e.target.value)}>
                 <option value="false">False</option>
                 <option value="true">True</option>
               </select>
@@ -40,7 +60,7 @@ export const ModalAddUsers = () => {
           <Button variant="secondary" onClick={handleClose}>
             Descartar
           </Button>
-          <Button variant="danger" onClick={handleClose}>
+          <Button variant="danger" onClick={()=>sendData()}>
             Guardar
           </Button>
         </Modal.Footer>
