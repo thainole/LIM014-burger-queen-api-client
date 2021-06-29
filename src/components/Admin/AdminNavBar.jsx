@@ -24,7 +24,7 @@ export const AdminNavBar = () => {
             </NavLink>
           </li>
           <li className="nav-item p-lg-1">
-            <NavLink to="/" className="nav-link">
+            <NavLink to="/" className="nav-link" onClick={()=> localStorage.removeItem('token')}>
               Salir
             </NavLink>
           </li>

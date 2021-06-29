@@ -1,6 +1,6 @@
 import React from 'react'
 import {ModalAddUsers} from './ModalAddUsers';
-import {usersRequest} from '../../services/users'
+import {usersRequest, deleteUser } from '../../services/users'
 
 export const AdminUsers = () => {
 
@@ -19,7 +19,19 @@ export const AdminUsers = () => {
 
   React.useEffect(() => {
     getUsers();
-  })
+  }, [])
+
+  const deleteUsers = (id) => {
+    console.log(id);
+    try {
+      const storedToken = localStorage.getItem('token');
+      deleteUser(storedToken, id);
+      getUsers();
+    }
+    catch (err) {
+      console.log(err)
+    }
+  }
 
   
   return (
@@ -45,7 +57,7 @@ export const AdminUsers = () => {
               <td>{user._id}</td>
               <td>{user.email}</td>
               <td>{user.roles.admin === true ? 'true' : 'false'}</td>
-              <td>🗑</td>
+              <td onClick={()=>deleteUsers(user._id)}>🗑</td>
               <td>✏</td>
           </tr>
           ))}

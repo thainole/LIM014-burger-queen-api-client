@@ -44,3 +44,28 @@ export const postUser = async (storedToken, obj) => {
       throw new Error(resp.statusText);
   } 
 }
+
+export const deleteUser = async (storedToken, id) => {
+
+  const resp = await axios({
+    method: 'delete',
+    url: `https://appi-burger-queen-client.herokuapp.com/users/${id}`,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${storedToken}`,
+    }
+  })
+
+  switch (resp.status) {
+    case 200:
+      return resp.data;
+    case 401:
+      throw new Error('Bad request'); 
+    case 403:
+      throw new Error('No eres admin'); 
+    case 404:
+      throw new Error('Correo no existe');       
+    default:
+      throw new Error(resp.statusText);
+  } 
+}  

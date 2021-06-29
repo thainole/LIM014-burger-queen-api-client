@@ -20,7 +20,7 @@ export const AdminProducts = () => {
 
   React.useEffect(() => {
     getProducts();
-  })
+  }, [])
   
 
   return (
