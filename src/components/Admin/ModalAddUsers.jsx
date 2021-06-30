@@ -35,7 +35,7 @@ export const ModalAddUsers = ({getUsers}) => {
 
       <Modal show={show} onHide={handleClose} animation={false}>
         <Modal.Header>
-          <Modal.Title>Nuevo producto</Modal.Title>
+          <Modal.Title>Nuevo usuario</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
