@@ -2,7 +2,7 @@ import React from 'react'
 import { Modal, Button, Form } from 'react-bootstrap';
 import {postProduct} from '../../services/products'
 
-export const ModalAddProduct = () => {
+export const ModalAddProduct = ({getProducts}) => {
 
   const [show, setShow] = React.useState(false);
 
@@ -21,12 +21,13 @@ export const ModalAddProduct = () => {
     type: type,
   }
 
-  const sendData = async () => {
-    console.log(sendNewProduct);
+  const createProduct = async () => {
+    console.log(sendNewProduct);// mandamos objeto sin dateEntry
     const storedToken = localStorage.getItem('token');
     const response = await postProduct(storedToken, sendNewProduct);
-    console.log(response);
+    console.log(response); // recibimos con dateEntry
     handleClose();
+    await getProducts()
   }
 
   return (
@@ -67,7 +68,7 @@ export const ModalAddProduct = () => {
           <Button variant="secondary" onClick={handleClose}>
             Descartar
           </Button>
-          <Button variant="danger" onClick={()=>sendData()}>
+          <Button variant="danger" onClick={()=>createProduct()}>
             Guardar
           </Button>
         </Modal.Footer>
