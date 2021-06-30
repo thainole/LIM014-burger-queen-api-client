@@ -36,7 +36,7 @@ export const OrdersNavBar = () => {
             </NavLink>
           </li>
           <li className="nav-item p-lg-1">
-            <NavLink to="/" className="nav-link">
+            <NavLink exact to="/" className="nav-link">
               Salir
             </NavLink>
           </li>

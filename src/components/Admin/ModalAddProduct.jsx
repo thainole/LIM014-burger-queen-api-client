@@ -10,7 +10,7 @@ export const ModalAddProduct = ({getProducts}) => {
   const handleShow = () => setShow(true);
 
   const [name, setName] = React.useState('')
-  const [price, setPrice] = React.useState(0)
+  const [price, setPrice] = React.useState('')
   const [type, setType] = React.useState('')
   const [image, setImage] = React.useState('')
 
@@ -19,6 +19,7 @@ export const ModalAddProduct = ({getProducts}) => {
     price: price,
     image: image,
     type: type,
+    dateEntry: new Date()
   }
 
   const createProduct = async () => {
