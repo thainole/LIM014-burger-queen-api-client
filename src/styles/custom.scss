@@ -1,0 +1,55 @@
+// Revisar el archivo node_modules\bootstrap\scss\_variables.scss
+// @import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+$container-max-widths: (
+  sm: 540px,
+  md: 780px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+);
+$white:    #fff !default;
+$nav-link-color: null $white;
+$nav-link-hover-color: null $white;
+// #eceae2 #f1f0ea
+$light: #f1f0ea;
+
+$font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
+$font-size-sm:                $font-size-base * .875 !default;
+$font-size-lg:                $font-size-base * 1.25 !default;
+$smaller-font:                0.8rem;
+$input-btn-font-size-sm:      0.9rem !default; 
+$input-btn-font-size:         $input-btn-font-size-sm;
+/* $h1-font-size:                $font-size-base * 2.5 !default;
+$h2-font-size:                $font-size-base * 2 !default;
+$h3-font-size:                $font-size-base * 1.75 !default;
+$h4-font-size:                $font-size-base * 1.5 !default;
+$h5-font-size:                $font-size-base * 1.25 !default;
+$h6-font-size:                $font-size-base !default; */
+
+.cardsWidth {
+  width: 8rem;
+  font-size: $smaller-font;
+}
+
+.imgCardSize {
+  padding: 0.3rem;
+  height: 6.5rem;
+}
+.hr-style{
+  border-right: solid 1px ;
+  margin-right: 1rem;
+  height: 100vh;
+}
+
+.containerSize {
+  width: 35%;
+} 
+.containerProd{
+  width: 60%;
+}
+.flexWrap {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+@import "../../node_modules/bootstrap/scss/bootstrap.scss"
