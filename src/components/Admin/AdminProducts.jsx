@@ -31,8 +31,9 @@ export const AdminProducts = () => {
       console.log(err);
     }
   };
-
-
+  const [show, setShow] = React.useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const updateProducts = async(id) => {
     console.log(id);
@@ -49,16 +50,17 @@ export const AdminProducts = () => {
     <section className="container-fluid p-3 w-100 col">
       <h3 className="w-100 text-center ">Lista de productos</h3>
       <div className="d-flex w-100 justify-content-end">
-        <ModalAddProduct getProducts={getProducts}/>
+      <button className="btn btn-danger" onClick={handleShow}>
+        Agregar producto
+      </button>
+        <ModalAddProduct getProducts={getProducts} show={show} handleClose={handleClose} updateProducts={updateProducts}/>
       </div>
       <table className="table table-sm table-hover w-100 mt-3 mx-2">
         <thead>
           <tr>
-            {/* <th>Id</th> */}
             <th>Nombre</th>
             <th>Tipo</th>
             <th>Precio</th>
-            {/* <th>Imagen</th> */}
             <th>Entrada</th>
             <th></th>
             <th></th>
@@ -69,8 +71,8 @@ export const AdminProducts = () => {
             <AdminEachProduct 
             product={product} 
             key={index}
-            updateProducts={updateProducts}
             deleteProducts={deleteProducts}
+            handleShow={handleShow}
         />
           ))}
         </tbody>
