@@ -9,7 +9,7 @@ export const ModalAddProduct = ({getProducts, show, handleClose, updateProducts}
     price: '',
     image: '',
     type: '',
-    dataEntry: ''
+    dateEntry: new Date()
   }
   const [values, setValues] = React.useState(initialValues)
 
@@ -17,14 +17,11 @@ export const ModalAddProduct = ({getProducts, show, handleClose, updateProducts}
     const { name, value } = e.target;
     name === 'price'
       ? setValues({...values, [name] : Number(value)})
-      : setValues({...values, [name] : value, dataEntry: new Date()})
-    // no muestra la fecha :( pero sí la envía lol 
+      : setValues({...values, [name] : value})
   };
 
-  // si mando la fecha en el createProduct o sendProduct, la manda como ''
   const createProduct = async () => {
     const storedToken = localStorage.getItem('token');
-    // setValues({...values, dataEntry: new Date()})
     await postProduct(storedToken, values);
     await setValues(initialValues);
     await getProducts();
