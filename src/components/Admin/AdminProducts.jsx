@@ -50,14 +50,10 @@ export const AdminProducts = () => {
     <section className="container-fluid p-3 w-100 col">
       <h3 className="w-100 text-center ">Lista de productos</h3>
       <div className="d-flex w-100 justify-content-end">
-<<<<<<< HEAD
       <button className="btn btn-danger" onClick={handleShow}>
         Agregar producto
       </button>
         <ModalAddProduct getProducts={getProducts} show={show} handleClose={handleClose} updateProducts={updateProducts}/>
-=======
-        <ModalAddProduct getProducts={getProducts}/>
->>>>>>> 4136d105eec6b17fd907f4afbff391d113513eee
       </div>
       <table className="table table-sm table-hover w-100 mt-3 mx-2">
         <thead>
@@ -75,13 +71,8 @@ export const AdminProducts = () => {
             <AdminEachProduct 
             product={product} 
             key={index}
-<<<<<<< HEAD
             deleteProducts={deleteProducts}
             handleShow={handleShow}
-=======
-            updateProducts={updateProducts}
-            deleteProducts={deleteProducts}
->>>>>>> 4136d105eec6b17fd907f4afbff391d113513eee
         />
           ))}
         </tbody>
