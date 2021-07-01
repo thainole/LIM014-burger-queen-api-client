@@ -2,7 +2,7 @@ import React from 'react'
 import { productsRequest } from '../../services/products'
 import { EachProduct } from './EachProduct'
 
-export const Products = () => {
+export const Products = ({chosenProduct, state, handleQty}) => {
 
   const [products, setProducts] = React.useState([])
 
@@ -54,8 +54,14 @@ export const Products = () => {
         <hr className="m-0" />
       </nav>
       <article className="d-flex flexWrap ">
-        {list.map((product, index) => (
-          <EachProduct product={product} index={index}/>
+        {list.map((product) => (
+          <EachProduct 
+            product={product} 
+            key={product._id}
+            chosenProduct={chosenProduct}
+            state={state}
+            handleQty={handleQty}
+          />
         ))}
     </article>
     </section>
