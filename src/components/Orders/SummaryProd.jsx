@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const SummaryProd = ({/* item, */ products, handleQty, handleRemove}) => {
-  console.log(products)
+  //console.log(products)
     return (
       <>
         { products.map((item) => (
@@ -12,7 +12,7 @@ export const SummaryProd = ({/* item, */ products, handleQty, handleRemove}) => 
                 <button onClick={(e) => {
                   e.preventDefault()
                   handleQty(item._id, "-")}}>-</button>
-                <p>{item.amount}</p>
+                <p>{item.qty}</p>
                 <button onClick={(e) => {
                   e.preventDefault()
                   handleQty(item._id, "+")}}>+</button>
@@ -22,7 +22,7 @@ export const SummaryProd = ({/* item, */ products, handleQty, handleRemove}) => 
                 </button>
               </div>
             </div>
-            <p>S/. {item.price * item.amount}</p>
+            <p>S/. {item.price * item.qty}</p>
           </section>
         ))}
      </>
