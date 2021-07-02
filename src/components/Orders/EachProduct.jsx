@@ -15,7 +15,7 @@ export const EachProduct = ({product, chosenProduct, state, handleQty}) => {
   }
 
   return (
-    <div className="card cardsWidth m-2" width="9rem" >  
+    <div className="card cardsWidth m-2" >  
       <img src={product.image} className="card-img-top imgCardSize" alt="" />
       <div className="card-body p-1 text-center">
         <p className="m-auto fw-bold">{product.name}</p>

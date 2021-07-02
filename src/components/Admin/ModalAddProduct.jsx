@@ -30,7 +30,6 @@ export const ModalAddProduct = ({getProducts, show, handleClose, updateProducts}
   const sendProduct = async() => {
     await createProduct();
     handleClose();
-    await getProducts()
   }
 
   return (
