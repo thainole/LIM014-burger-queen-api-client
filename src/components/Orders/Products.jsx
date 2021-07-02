@@ -46,7 +46,7 @@ export const Products = ({chosenProduct, state, handleQty}) => {
   return (
     <section className="containerProd">
       <nav>
-        <ul className="nav" >
+        <ul className="nav d-flex justify-content-between" >
           <li className="btn me-1 px-2" onClick={() => productsType("Desayuno")}>Desayuno</li>
           <li className="btn me-1 px-2" onClick={() => productsType("Hamburguesas")}>Hamburguesas</li>
           <li className="btn me-1 px-2" onClick={() => productsType("Acompañamientos")}>Acompañamientos</li>
@@ -54,7 +54,7 @@ export const Products = ({chosenProduct, state, handleQty}) => {
         </ul>
         <hr className="m-0" />
       </nav>
-      <article className="d-flex flexWrap ">
+      <article className="d-flex flexWrap m-1 px-1">
         {list.map((product) => (
           <EachProduct 
             product={product} 

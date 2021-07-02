@@ -25,22 +25,17 @@ export const Summary = ({state, setState, handleQty, initialValues, handleRemove
   }
   
   return (
-    <form className="orderList" onSubmit={handleSubmit}>
-      <h3>Resumen del pedido</h3>
-      <section className="customerInfo">
-        <p>Cliente : </p>
-        <input
-          type="text"
-          name="client"
-          onChange={handleInputChange}
-          value={state.client}
-          required
-        />
+    <form onSubmit={handleSubmit} className="my-1 me-1 pe-1 ms-lg-3 ">
+      <h4>Resumen del pedido</h4>
+      <section className="mb-3 mt-3 d-flex align-items-center">
+        <label htmlFor="clientName" className="form-label me-2 mb-1">Cliente:</label>
+        <input type="text" className="form-control" id="clientName" aria-describedby="clientName"
+          name="client" onChange={handleInputChange} value={state.client} required />
       </section>
       <section>
-        <div>
-          <h4>Productos</h4>
-          <h4>Precio</h4>
+        <div className="d-flex justify-content-between">
+          <h6><u>Productos</u></h6>
+          <h6><u>Precio</u></h6>
         </div>
         <aside>
           {/* {state.products.map((item) => ( */}
@@ -52,28 +47,29 @@ export const Summary = ({state, setState, handleQty, initialValues, handleRemove
               handleRemove={handleRemove}
             />
           {/* ))} */}
+          < br />
           {
             state.products.length > 0 ?
-            <h3 className="h3">Total:&nbsp;&nbsp;&nbsp;S/. { totalSum(state.products) }</h3>
-            : <h5>No has agregado ningún producto :(</h5>
+            <h6>Total:&nbsp;&nbsp;&nbsp;S/. { totalSum(state.products) }</h6>
+            : <p>No has agregado ningún producto :(</p>
           }
         </aside>
       </section>
       <div>
         {
           state.products.length > 0 ?
-          <>
-            <button className="submitButton grey"
+          <div className="d-flex justify-content-around mt-3">
+            <button className="btn btn-secondary"
               onClick={e=> {
                 e.preventDefault()
                 setState(initialValues)
               }}>
               Borrar orden
             </button>
-            <button className="submitButton" >
+            <button className="btn btn-danger">
               Enviar a cocina
             </button>
-          </>
+          </div>
         : ''
         }
       </div>

@@ -5,24 +5,26 @@ export const SummaryProd = ({/* item, */ products, handleQty, handleRemove}) => 
     return (
       <>
         { products.map((item) => (
-          <section className="prodQty" >
-            <div className="prod">
-              <p>{item.name}</p>
-              <div>
-                <button onClick={(e) => {
-                  e.preventDefault()
-                  handleQty(item._id, "-")}}>-</button>
+          <section className="d-flex justify-content-between" key={item._id}>
+            <div>
+              <p className="mb-0">{item.name}</p>
+              <div className="d-flex align-items-center">
+                <button type="button" className="btn btn-light btn-outline-secondary p-1 me-1"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    handleQty(item._id, "-")}}>-</button>
                 <p>{item.qty}</p>
-                <button onClick={(e) => {
-                  e.preventDefault()
-                  handleQty(item._id, "+")}}>+</button>
-                <button onClick={(e) => {
-                  e.preventDefault()
-                  handleRemove(item._id)}}>🗑
-                </button>
+                <button type="button" className="btn btn-light btn-outline-secondary mx-1 p-1"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    handleQty(item._id, "+")}}>+</button>
+                <button type="button" className="btn btn-light btn-outline-secondary p-1"
+                  onClick={(e) => {
+                    e.preventDefault()
+                    handleRemove(item._id)}}>🗑</button>
               </div>
             </div>
-            <p>S/. {item.price * item.qty}</p>
+            <p className="mb-0">S/. {item.price * item.qty}</p>
           </section>
         ))}
      </>
