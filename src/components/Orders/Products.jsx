@@ -2,15 +2,18 @@ import React from 'react'
 import { productsRequest } from '../../services/products'
 import { EachProduct } from './EachProduct'
 
-export const Products = () => {
+export const Products = ({chosenProduct, state, handleQty}) => {
 
   const [products, setProducts] = React.useState([])
+  const [list, setList] = React.useState([]);
 
   const getProducts = async() => {
     try {
       const storedToken = localStorage.getItem('token');
       const response = await productsRequest(storedToken);
       setProducts(response) ;
+      const firstView = response.filter((elem) => elem.type === "Desayuno");
+      setList(firstView)
     }
     catch (err) {
       console.log(err)
@@ -19,10 +22,8 @@ export const Products = () => {
 
   React.useEffect(() => {
     getProducts();
-  })
-
-  const firstView = products.filter((elem) => elem.type === "Desayuno");
-  const [list, setList] = React.useState(firstView);
+  }, [])
+ 
 
   const productsType = (option) => {
     // eslint-disable-next-line default-case
@@ -54,8 +55,14 @@ export const Products = () => {
         <hr className="m-0" />
       </nav>
       <article className="d-flex flexWrap ">
-        {list.map((product, index) => (
-          <EachProduct product={product} index={index}/>
+        {list.map((product) => (
+          <EachProduct 
+            product={product} 
+            key={product._id}
+            chosenProduct={chosenProduct}
+            state={state}
+            handleQty={handleQty}
+          />
         ))}
     </article>
     </section>
