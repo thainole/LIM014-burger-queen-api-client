@@ -1,16 +1,16 @@
 import React from 'react'
 
 export const EachProduct = ({product, chosenProduct, state, handleQty}) => {
-  //console.log(key)
+  //console.log(state)
 
   const addProducts = (id) => {
-    console.log(id)
-    const findProduct = state.products.find(item => item._id === id)
-    console.log(findProduct)
+    console.log(id)//60dd318c2bd131001725860e cafe con leche
+    const findProduct = state.products.find(obj => obj._id === id)
+    //console.log(findProduct)
     if (findProduct) {
       return handleQty(id, '+')
     } else {
-      return chosenProduct({ ...product, amount: 1  });
+      return chosenProduct({ ...product, qty: 1  });
     }
   }
 
