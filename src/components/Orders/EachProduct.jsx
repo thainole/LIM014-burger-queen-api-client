@@ -4,11 +4,13 @@ export const EachProduct = ({product, chosenProduct, state, handleQty}) => {
   //console.log(key)
 
   const addProducts = (id) => {
-    const findProduct = state.products.find(item => item.id === id)
+    console.log(id)
+    const findProduct = state.products.find(item => item._id === id)
+    console.log(findProduct)
     if (findProduct) {
       return handleQty(id, '+')
     } else {
-      return chosenProduct({ ...product, amount: 1 });
+      return chosenProduct({ ...product, amount: 1  });
     }
   }
 

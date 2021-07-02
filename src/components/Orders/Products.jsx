@@ -5,12 +5,15 @@ import { EachProduct } from './EachProduct'
 export const Products = ({chosenProduct, state, handleQty}) => {
 
   const [products, setProducts] = React.useState([])
+  const [list, setList] = React.useState([]);
 
   const getProducts = async() => {
     try {
       const storedToken = localStorage.getItem('token');
       const response = await productsRequest(storedToken);
       setProducts(response) ;
+      const firstView = response.filter((elem) => elem.type === "Desayuno");
+      setList(firstView)
     }
     catch (err) {
       console.log(err)
@@ -19,10 +22,8 @@ export const Products = ({chosenProduct, state, handleQty}) => {
 
   React.useEffect(() => {
     getProducts();
-  })
-
-  const firstView = products.filter((elem) => elem.type === "Desayuno");
-  const [list, setList] = React.useState(firstView);
+  }, [])
+ 
 
   const productsType = (option) => {
     // eslint-disable-next-line default-case

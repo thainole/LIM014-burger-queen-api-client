@@ -1,12 +1,12 @@
 import React from 'react';
 import { SummaryProd } from './SummaryProd';
 
-export const Summary = ({state, setState, handleQty, initialValues, /* handleRemove */}) => {
-  
-  const totalSum = products => {
-    const total = products.reduce((acc, item) => acc + item.price* item.amount, 0);
-    return total;
-  }
+export const Summary = ({state, setState, handleQty, initialValues, handleRemove }) => {
+  console.log(state)
+  // const totalSum = products => {
+  //   const total = products.reduce((acc, item) => acc + item.price* item.amount, 0);
+  //   return total;
+  // }
 
   const handleInputChange = (e) => {
     const {name, value} = e.target;
@@ -22,7 +22,7 @@ export const Summary = ({state, setState, handleQty, initialValues, /* handleRem
   }
   
   return (
-<form className="orderList" onSubmit={handleSubmit}>
+  <form className="orderList" onSubmit={handleSubmit}>
       <h3>Resumen del pedido</h3>
       <section className="customerInfo">
         <p>Cliente : </p>
@@ -33,35 +33,27 @@ export const Summary = ({state, setState, handleQty, initialValues, /* handleRem
           value={state.client}
           required
         />
-        {/* <p>Mesero: </p>
-        <input
-          type="text"
-          name="server"
-          onChange={handleInputChange}
-          value={state.server}
-          required
-        /> */}
       </section>
-      <section className="orderDetails">
-        <div className="titles">
+      <section>
+        <div>
           <h4>Productos</h4>
           <h4>Precio</h4>
         </div>
-        <aside className="sumary">
-          {state.products.map((item) => (
+        <aside>
+          {/* {state.products.map((item) => ( */}
             <SummaryProd
-              key={item._id}
-              item={item}
+              products={state.products}
+              // key={item._id}
+              // item={item}
               handleQty={handleQty}
-              //handleRemove={handleRemove}
+              handleRemove={handleRemove}
             />
-          ))}
+          {/* ))} */}
           {
             state.products.length > 0 ?
-            <h3 className="h3">Total:&nbsp;&nbsp;&nbsp;S/. {totalSum(state.products)}</h3>
+            <h3 className="h3">Total:&nbsp;&nbsp;&nbsp;S/. {/* {totalSum(state.products)} */}</h3>
             : <h5>No has agregado ningún producto :(</h5>
           }
-
         </aside>
       </section>
       <div>
