@@ -8,9 +8,9 @@ export const TakeOrder = () => {
     userId: "",     //Id usuaria que creó la orden - string
     client: "",     //Clienta para quien se creó la orden - string
     products: [],   //Productos - array
-    status: "",
+    /* status: "",
     dateEntry: new Date(),
-    dateProcessed: new Date()
+    dateProcessed: new Date() */
   }
 
   const [state, setState] = React.useState(initialValues);

@@ -1,12 +1,10 @@
 import React from 'react'
 
 export const EachProduct = ({product, chosenProduct, state, handleQty}) => {
-  //console.log(state)
 
   const addProducts = (id) => {
-    console.log(id)//60dd318c2bd131001725860e cafe con leche
+    // console.log(id)
     const findProduct = state.products.find(obj => obj._id === id)
-    //console.log(findProduct)
     if (findProduct) {
       return handleQty(id, '+')
     } else {
