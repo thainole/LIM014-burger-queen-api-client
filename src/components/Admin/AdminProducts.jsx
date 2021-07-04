@@ -1,5 +1,9 @@
 import React from "react";
-import { productsRequest, deleteProduct, updateProduct } from "../../services/products";
+import {
+  productsRequest,
+  deleteProduct,
+  updateProduct,
+} from "../../services/products";
 import { AdminEachProduct } from "./AdminEachProduct";
 import { ModalAddProduct } from "./ModalAddProduct";
 
@@ -8,20 +12,17 @@ export const AdminProducts = () => {
 
   const getProducts = async () => {
     try {
+      //TRAE TODOS LOS PRODUCTOS AGREGADOS EN EL MODAL ADD PRODUCTS
       const storedToken = localStorage.getItem("token");
       const response = await productsRequest(storedToken);
-      console.log(response)
+      console.log(response); // [{dateEntry:xyz, image:xyz, name:xyz, price:xyz, type:xyz, _id: xyz}]
       setProducts(response);
     } catch (err) {
       console.log(err);
     }
   };
 
-  React.useEffect(() => {
-    getProducts();
-  }, []);
-
-  const deleteProducts = async(id) => {
+  const deleteProducts = async (id) => {
     console.log(id);
     try {
       const storedToken = localStorage.getItem("token");
@@ -31,29 +32,68 @@ export const AdminProducts = () => {
       console.log(err);
     }
   };
+  //---------------------- SETTEO MODAL ---------------------
   const [show, setShow] = React.useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  
+  //--------------- TRAYENDO VALUES DEL MODAL.ADD ---------------
+  const initialValues = {
+    name: "",
+    price: "",
+    image: "",
+    type: "",
+    //dateEntry: new Date()
+  };
+  const [values, setValues] = React.useState(initialValues);
+  
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    name === "price"
+      ? setValues({ ...values, [name]: Number(value) })
+      : setValues({ ...values, [name]: value });
+  };
+  console.log(values)
+  //--------------------------------------------------------
 
-  const updateProducts = async(id) => {
-    console.log(id);
-    try {
+  const updateProducts =(objProduct) => {
+    console.log(objProduct);
+    handleShow();
+    setValues(objProduct);// muestra los valores al modal
+  }
+
+  const saveModal = async (newObjProduct) => {
+    try {//newObjectProduct es el objeto 
       const storedToken = localStorage.getItem("token");
-      await updateProduct(storedToken, id/* , obj */);
+      await updateProduct(storedToken, newObjProduct);
       await getProducts();
+      handleClose();
     } catch (err) {
       console.log(err);
     }
   };
 
+  React.useEffect(() => {
+    getProducts();
+  }, []);
+  
   return (
     <section className="container-fluid p-3 w-100 col">
       <h3 className="w-100 text-center ">Lista de productos</h3>
       <div className="d-flex w-100 justify-content-end">
-      <button className="btn btn-danger" onClick={handleShow}>
-        Agregar producto
-      </button>
-        <ModalAddProduct getProducts={getProducts} show={show} handleClose={handleClose} updateProducts={updateProducts}/>
+        <button className="btn btn-danger" onClick={handleShow}>
+          Agregar producto
+        </button>
+        <ModalAddProduct
+          initialValues={initialValues}
+          values={values}
+          setValues={setValues}
+          handleChange={handleChange}
+          getProducts={getProducts}
+          show={show}
+          handleClose={handleClose}
+          saveModal={saveModal}
+        />
       </div>
       <table className="table table-sm table-hover w-100 mt-3 mx-2">
         <thead>
@@ -68,12 +108,13 @@ export const AdminProducts = () => {
         </thead>
         <tbody>
           {products.map((product, index) => (
-            <AdminEachProduct 
-            product={product} 
-            key={index}
-            deleteProducts={deleteProducts}
-            handleShow={handleShow}
-        />
+            <AdminEachProduct
+              product={product}
+              key={index}
+              deleteProducts={deleteProducts}
+              handleShow={handleShow}
+              updateProducts={updateProducts}
+            />
           ))}
         </tbody>
       </table>

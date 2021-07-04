@@ -3,7 +3,7 @@ const axios = require('axios');
 export const productsRequest = async (storedToken) => {
   const resp = await axios({
     method: 'get',
-    url: 'https://appi-burger-queen-client.herokuapp.com/products',
+    url: 'https://burger-queen-api-yrem.herokuapp.com/products',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${storedToken}`,
@@ -22,7 +22,7 @@ export const productsRequest = async (storedToken) => {
 export const postProduct = async (storedToken, obj) => {
   const resp = await axios({
     method: 'post',
-    url: 'https://appi-burger-queen-client.herokuapp.com/products',
+    url: 'https://burger-queen-api-yrem.herokuapp.com/products',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${storedToken}`,
@@ -43,10 +43,10 @@ export const postProduct = async (storedToken, obj) => {
   } 
 }
 
-export const updateProduct = async (storedToken, id, obj) => {
+export const updateProduct = async (storedToken, obj) => {
   const resp = await axios({
     method: 'put',
-    url: `https://appi-burger-queen-client.herokuapp.com/products/${id}`,
+    url: `https://burger-queen-api-yrem.herokuapp.com/products/${obj._id}`,
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${storedToken}`,
@@ -57,9 +57,9 @@ export const updateProduct = async (storedToken, id, obj) => {
     case 200:
       return resp.data;
     case 400:
-      throw new Error('Indique precio y nombre para el producto'); 
+      throw new Error('No se ha indicado ninguna propiedad a modificar'); 
     case 401:
-      throw new Error('Inserta un email y contraseña correctos'); 
+      throw new Error('No hay cabecera de autenticación'); 
     case 403:
       throw new Error('No eres admin');
     case 404:
@@ -73,7 +73,7 @@ export const deleteProduct = async (storedToken, id) => {
 
   const resp = await axios({
     method: 'delete',
-    url: `https://appi-burger-queen-client.herokuapp.com/products/${id}`,
+    url: `https://burger-queen-api-yrem.herokuapp.com/products/${id}`,
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${storedToken}`,
@@ -84,7 +84,7 @@ export const deleteProduct = async (storedToken, id) => {
     case 200:
       return resp.data;
     case 401:
-      throw new Error('Bad request'); 
+      throw new Error('No hay cabecera de autenticación'); 
     case 403:
       throw new Error('No eres admin'); 
     case 404:
