@@ -3,7 +3,7 @@ const axios = require('axios');
 export const productsRequest = async (storedToken) => {
   const resp = await axios({
     method: 'get',
-    url: 'https://appi-burger-queen-client.herokuapp.com/products',
+    url: 'https://burger-queen-api-yrem.herokuapp.com/products',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${storedToken}`,
@@ -22,7 +22,7 @@ export const productsRequest = async (storedToken) => {
 export const postProduct = async (storedToken, obj) => {
   const resp = await axios({
     method: 'post',
-    url: 'https://appi-burger-queen-client.herokuapp.com/products',
+    url: 'https://burger-queen-api-yrem.herokuapp.com/products',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${storedToken}`,
@@ -46,7 +46,7 @@ export const postProduct = async (storedToken, obj) => {
 export const updateProduct = async (storedToken, id, obj) => {
   const resp = await axios({
     method: 'put',
-    url: `https://appi-burger-queen-client.herokuapp.com/products/${id}`,
+    url: `https://burger-queen-api-yrem.herokuapp.com/products/${id}`,
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${storedToken}`,
@@ -73,7 +73,7 @@ export const deleteProduct = async (storedToken, id) => {
 
   const resp = await axios({
     method: 'delete',
-    url: `https://appi-burger-queen-client.herokuapp.com/products/${id}`,
+    url: `https://burger-queen-api-yrem.herokuapp.com/products/${id}`,
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${storedToken}`,

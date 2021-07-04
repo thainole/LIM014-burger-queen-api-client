@@ -3,7 +3,7 @@ const axios = require('axios');
 export const usersRequest = async (storedToken) => {
   const resp = await axios({
     method: 'get',
-    url: 'https://appi-burger-queen-client.herokuapp.com/users',
+    url: 'https://burger-queen-api-yrem.herokuapp.com/users',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${storedToken}`,
@@ -24,7 +24,7 @@ export const usersRequest = async (storedToken) => {
 export const postUser = async (storedToken, obj) => {
   const resp = await axios({
     method: 'post',
-    url: 'https://appi-burger-queen-client.herokuapp.com/users',
+    url: 'https://burger-queen-api-yrem.herokuapp.com/users',
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${storedToken}`,
@@ -49,7 +49,7 @@ export const deleteUser = async (storedToken, id) => {
 
   const resp = await axios({
     method: 'delete',
-    url: `https://appi-burger-queen-client.herokuapp.com/users/${id}`,
+    url: `https://burger-queen-api-yrem.herokuapp.com/users/${id}`,
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${storedToken}`,

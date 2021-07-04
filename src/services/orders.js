@@ -3,7 +3,7 @@
 // export const postOrder = async (storedToken, obj) => {
 //     const resp = await axios({
 //       method: 'post',
-//       url: 'https://appi-burger-queen-client.herokuapp.com/products',
+//       url: 'https://burger-queen-api-yrem.herokuapp.com/products',
 //       headers: {
 //         'Content-Type': 'application/json',
 //         Authorization: `Bearer ${storedToken}`,
