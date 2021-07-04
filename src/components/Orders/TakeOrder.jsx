@@ -19,7 +19,7 @@ export const TakeOrder = () => {
   }
 
   const handleQty = (id, sign) => {
-    console.log(id, sign)
+    //console.log(id, sign)
     const filtering = state.products.map((item) => {
       if(item._id === id){
         if(sign === "+"){
