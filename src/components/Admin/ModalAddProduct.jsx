@@ -1,16 +1,16 @@
 import React from "react";
 import { Modal, Form } from "react-bootstrap";
-import { postProduct } from "../../services/products";
+import { postFn } from "../../services/crud";
 
 export const ModalAddProduct = (props) => {
 
   const createProduct = async () => {
-    await postProduct(props.storedToken, props.values);
-    await props.getProducts();
+    await postFn(props.storedToken, 'products', props.values);
   };
 
   const sendProduct = async (fn) => {
     await fn;
+    await props.getProducts();
     props.handleClose();
     props.setValues(props.initialValues);
   }

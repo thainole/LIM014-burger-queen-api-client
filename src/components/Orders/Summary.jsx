@@ -2,7 +2,6 @@ import React from 'react';
 import { SummaryProd } from './SummaryProd';
 
 export const Summary = ({state, setState, handleQty, initialValues, handleRemove }) => {
-  //console.log(state)
   const totalSum = (products) => {
     const total = products.reduce((acc, item) => acc + item.price* item.qty, 0);
     return total;

@@ -1,16 +1,16 @@
 import React from "react";
 import { Modal, Form } from "react-bootstrap";
-import { postUser } from "../../services/users";
+import { postFn } from "../../services/crud";
 
 export const ModalAddUsers = (props) => {
 
   const createUser = async () => {
-    await postUser(props.storedToken, props.values);
-    await props.getUsers();
+    await postFn(props.storedToken, 'users', props.values);
   }
 
   const sendUser = async (fn) => {
     await fn;
+    await props.getUsers();
     props.handleClose();
     props.setValues(props.initialValues);
   }

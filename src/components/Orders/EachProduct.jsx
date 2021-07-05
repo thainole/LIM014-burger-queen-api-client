@@ -3,7 +3,6 @@ import React from 'react'
 export const EachProduct = ({product, chosenProduct, state, handleQty}) => {
 
   const addProducts = (id) => {
-    // console.log(id)
     const findProduct = state.products.find(obj => obj._id === id)
     if (findProduct) {
       return handleQty(id, '+')

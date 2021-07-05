@@ -1,5 +1,5 @@
 import React from 'react'
-import { productsRequest } from '../../services/products'
+import { getFn } from '../../services/crud'
 import { EachProduct } from './EachProduct'
 
 export const Products = ({chosenProduct, state, handleQty}) => {
@@ -10,7 +10,7 @@ export const Products = ({chosenProduct, state, handleQty}) => {
   const getProducts = async() => {
     try {
       const storedToken = localStorage.getItem('token');
-      const response = await productsRequest(storedToken);
+      const response = await getFn(storedToken, 'products');
       setProducts(response) ;
       const firstView = response.filter((elem) => elem.type === "Desayuno");
       setList(firstView)

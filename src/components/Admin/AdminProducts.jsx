@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  productsRequest,
-  deleteProduct,
-  updateProduct,
-} from "../../services/products";
+import {getFn, updateFn, deleteFn} from "../../services/crud";
 import { AdminEachProduct } from "./AdminEachProduct";
 import { ModalAddProduct } from "./ModalAddProduct";
 
@@ -13,17 +9,16 @@ export const AdminProducts = () => {
 
   const getProducts = async () => {
     try {
-      //TRAE TODOS LOS PRODUCTOS AGREGADOS EN EL MODAL ADD PRODUCTS
-      const response = await productsRequest(storedToken);
+      const response = await getFn(storedToken, 'products');
       setProducts(response);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const deleteProducts = async (id) => {
+  const deleteProducts = async (obj) => {
     try {
-      await deleteProduct(storedToken, id);
+      await deleteFn(storedToken, 'products', obj);
       await getProducts();
     } catch (err) {
       console.log(err);
@@ -34,7 +29,7 @@ export const AdminProducts = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   
-  //--------------- TRAYENDO VALUES DEL MODAL.ADD ---------------
+  //--------------- TRAYENDO VALUES DEL MODAL ---------------
   const initialValues = {
     name: "",
     price: "",
@@ -49,19 +44,15 @@ export const AdminProducts = () => {
       ? setValues({ ...values, [name]: Number(value) })
       : setValues({ ...values, [name]: value });
   };
-  //--------------------------------------------------------
 
   const updateProducts =(objProduct) => {
-    console.log(objProduct);
     handleShow();
     setValues(objProduct);// muestra los valores al modal
   }
 
   const saveModal = async (newObjProduct) => {
-    try {//newObjectProduct es el objeto 
-      await updateProduct(storedToken, newObjProduct);
-      await getProducts();
-      handleClose();
+    try {
+      await updateFn(storedToken, 'products', newObjProduct);
     } catch (err) {
       console.log(err);
     }
@@ -91,15 +82,14 @@ export const AdminProducts = () => {
           saveModal={saveModal}
         />
       </div>
-      <table className="table table-sm table-hover w-100 mt-3 mx-2">
+      <table className="table table-sm  table-hover mt-3 mx-2">
         <thead>
           <tr>
             <th>Nombre</th>
             <th>Tipo</th>
-            <th>Precio</th>
-            <th>Entrada</th>
-            <th></th>
-            <th></th>
+            <th className="text-center">Precio</th>
+            <th className="text-center">Entrada</th>
+            <th>Opciones</th>
           </tr>
         </thead>
         <tbody>
