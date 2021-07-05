@@ -7,7 +7,7 @@ export const EachProduct = ({product, chosenProduct, state, handleQty}) => {
     if (findProduct) {
       return handleQty(id, '+')
     } else {
-      return chosenProduct({ ...product, qty: 1  });
+      return chosenProduct({product:{...product}, qty: 1  });
     }
   }
 

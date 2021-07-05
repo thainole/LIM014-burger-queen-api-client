@@ -20,11 +20,12 @@ export const TakeOrder = () => {
 
   const handleQty = (id, sign) => {
     const filtering = state.products.map((item) => {
-      if(item._id === id){
+      console.log(item)
+      if(item.product._id === id){
         if(sign === "+"){
-          return {...item, qty: item.qty +1 }
+          return {product:{...item.product}, qty: item.qty +1 }
         } else if(sign === "-" && item.qty > 1){
-          return { ...item, qty: item.qty -1}
+          return {product:{...item.product}, qty: item.qty -1}
         }
       }
       return item;
@@ -32,7 +33,7 @@ export const TakeOrder = () => {
     setState((prev) => ({...prev, products: filtering}))
   }
   const handleRemove = (id) => {
-    const newList = state.products.filter(item => item._id !== id)
+    const newList = state.products.filter(item => item.product._id !== id)
     setState((prev) => ({...prev, products: newList}))
   }
 

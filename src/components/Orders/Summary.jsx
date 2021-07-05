@@ -3,7 +3,7 @@ import { SummaryProd } from './SummaryProd';
 
 export const Summary = ({state, setState, handleQty, initialValues, handleRemove }) => {
   const totalSum = (products) => {
-    const total = products.reduce((acc, item) => acc + item.price* item.qty, 0);
+    const total = products.reduce((acc, item) => acc + item.product.price * item.qty, 0);
     return total;
   }
 
@@ -12,19 +12,11 @@ export const Summary = ({state, setState, handleQty, initialValues, handleRemove
     setState({...state, [name] : value})
   }
 
-  // const dataStore = async(state) => {
-  //   const storedToken = localStorage.getItem('token');
-  //   await 
-  // }
-
-  //DUDA: tenemos que enviar solo el id del producto? o podemos enviar TODO el array del producto? :(
-    // es que no sale T.T no sé cómo hacer que enviemos solo el id.
-
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log('cliiiiiickkkkk enviar')
+    console.log(state)
     setState(initialValues)
-    // state.totalPrice = totalSum(state.products)
   }
   
   return (
