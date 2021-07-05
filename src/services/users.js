@@ -45,6 +45,32 @@ export const postUser = async (storedToken, obj) => {
   } 
 }
 
+export const updateUser = async (storedToken, obj) => {
+  const resp = await axios({
+    method: 'put',
+    url: `https://burger-queen-api-yrem.herokuapp.com/users/${obj._id}`,
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${storedToken}`,
+    },
+    data: obj,
+  });
+  switch (resp.status) {
+    case 200:
+      return resp.data;
+    case 400:
+      throw new Error('No se ha indicado ninguna propiedad a modificar'); 
+    case 401:
+      throw new Error('No hay cabecera de autenticación'); 
+    case 403:
+      throw new Error('No eres admin');
+    case 404:
+      throw new Error('El usuario indicado no existe');                
+    default:
+      throw new Error(resp.statusText);
+  } 
+}
+
 export const deleteUser = async (storedToken, id) => {
 
   const resp = await axios({

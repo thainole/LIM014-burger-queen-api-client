@@ -9,13 +9,12 @@ import { ModalAddProduct } from "./ModalAddProduct";
 
 export const AdminProducts = () => {
   const [products, setProducts] = React.useState([]);
+  const storedToken = localStorage.getItem('token');
 
   const getProducts = async () => {
     try {
       //TRAE TODOS LOS PRODUCTOS AGREGADOS EN EL MODAL ADD PRODUCTS
-      const storedToken = localStorage.getItem("token");
       const response = await productsRequest(storedToken);
-      console.log(response); // [{dateEntry:xyz, image:xyz, name:xyz, price:xyz, type:xyz, _id: xyz}]
       setProducts(response);
     } catch (err) {
       console.log(err);
@@ -23,9 +22,7 @@ export const AdminProducts = () => {
   };
 
   const deleteProducts = async (id) => {
-    console.log(id);
     try {
-      const storedToken = localStorage.getItem("token");
       await deleteProduct(storedToken, id);
       await getProducts();
     } catch (err) {
@@ -43,7 +40,6 @@ export const AdminProducts = () => {
     price: "",
     image: "",
     type: "",
-    //dateEntry: new Date()
   };
   const [values, setValues] = React.useState(initialValues);
   
@@ -53,7 +49,6 @@ export const AdminProducts = () => {
       ? setValues({ ...values, [name]: Number(value) })
       : setValues({ ...values, [name]: value });
   };
-  console.log(values)
   //--------------------------------------------------------
 
   const updateProducts =(objProduct) => {
@@ -64,7 +59,6 @@ export const AdminProducts = () => {
 
   const saveModal = async (newObjProduct) => {
     try {//newObjectProduct es el objeto 
-      const storedToken = localStorage.getItem("token");
       await updateProduct(storedToken, newObjProduct);
       await getProducts();
       handleClose();
@@ -75,6 +69,7 @@ export const AdminProducts = () => {
 
   React.useEffect(() => {
     getProducts();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
   return (
@@ -90,6 +85,7 @@ export const AdminProducts = () => {
           setValues={setValues}
           handleChange={handleChange}
           getProducts={getProducts}
+          storedToken={storedToken}
           show={show}
           handleClose={handleClose}
           saveModal={saveModal}
