@@ -21,6 +21,7 @@ export const Summary = ({state, setState, handleQty, initialValues, handleRemove
       qty: item.qty
     }))
   }
+
   const dataStore = async() => {
     const storedToken = localStorage.getItem('token');
     await postFn(storedToken, 'orders', order);
