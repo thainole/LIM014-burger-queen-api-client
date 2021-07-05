@@ -21,7 +21,8 @@ export const Summary = ({state, setState, handleQty, initialValues, handleRemove
       qty: item.qty
     }))
   }
-  const dataStore = async(order) => {
+
+  const dataStore = async() => {
     const storedToken = localStorage.getItem('token');
     await postFn(storedToken, 'orders', order);
   }
@@ -29,7 +30,7 @@ export const Summary = ({state, setState, handleQty, initialValues, handleRemove
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(order)
-    dataStore(state);
+    dataStore();
     setState(initialValues);
   };
   
