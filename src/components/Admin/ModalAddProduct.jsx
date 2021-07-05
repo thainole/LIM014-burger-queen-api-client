@@ -1,34 +1,24 @@
 import React from "react";
 import { Modal, Form } from "react-bootstrap";
-import { postProduct } from "../../services/products";
+import { postFn } from "../../services/crud";
 
-export const ModalAddProduct = ({
-  getProducts,
-  show,
-  handleClose,
-  handleChange,
-  initialValues,
-  values,
-  setValues,
-  saveModal,
-}) => {
+export const ModalAddProduct = (props) => {
 
   const createProduct = async () => {
-    const storedToken = localStorage.getItem("token");
-    await postProduct(storedToken, values);
-    await getProducts();
+    await postFn(props.storedToken, 'products', props.values);
   };
 
-  const sendProduct = async () => {
-    //await setValues(values);// IMXTNT!! es para PASAR estos values, en values de admin products(SINO LLEGA EN BLANCO)
-    await createProduct();
-    handleClose();
-  };
+  const sendProduct = async (fn) => {
+    await fn;
+    await props.getProducts();
+    props.handleClose();
+    props.setValues(props.initialValues);
+  }
 
   return (
-    <Modal show={show} onHide={handleClose} animation={false}>
+    <Modal show={props.show} onHide={props.handleClose} animation={false}>
       <Modal.Header>
-        <Modal.Title>Nuevo producto</Modal.Title>
+        <Modal.Title>{props.values._id ? 'Editar producto' : 'Nuevo producto'}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
@@ -41,8 +31,8 @@ export const ModalAddProduct = ({
               size="sm"
               type="text"
               name="name"
-              value={values.name}
-              onChange={handleChange}
+              value={props.values.name}
+              onChange={props.handleChange}
             />
           </Form.Group>
           <Form.Group
@@ -56,15 +46,15 @@ export const ModalAddProduct = ({
               type="number"
               min="0"
               name="price"
-              value={values.price}
-              onChange={handleChange}
+              value={props.values.price}
+              onChange={props.handleChange}
             />
             <Form.Label className="me-2">Tipo: </Form.Label>
             <select
               className="form-select w-50"
               aria-label="Default select example"
               name="type"
-              onChange={handleChange}
+              onChange={props.handleChange}
             >
               <option>Seleccionar</option>
               <option value="Desayuno">Desayuno</option>
@@ -83,8 +73,8 @@ export const ModalAddProduct = ({
               size="sm"
               type="text"
               name="image"
-              value={values.image}
-              onChange={handleChange}
+              value={props.values.image}
+              onChange={props.handleChange}
             />
           </Form.Group>
         </Form>
@@ -93,18 +83,16 @@ export const ModalAddProduct = ({
         <button
           className="btn btn-secondary"
           onClick={() => {
-            handleClose();
-            setValues(initialValues);
-          }}
-        >
+            props.handleClose();
+            props.setValues(props.initialValues)}}>
           Descartar
         </button>
         {
-          values._id ? 
-          <button className="btn btn-danger" onClick={() => saveModal(values)}>
+          props.values._id ? 
+          <button className="btn btn-danger" onClick={() => sendProduct(props.saveModal(props.values))}>
             Modificar
           </button>:
-          <button className="btn btn-danger" onClick={() => sendProduct()}>
+          <button className="btn btn-danger" onClick={() => sendProduct(createProduct())}>
             Crear
           </button>
         }

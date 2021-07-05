@@ -3,7 +3,6 @@ const jwtDecode = require('jwt-decode')
 
 export const getToken = async (requestToken) => {
   const resp = await axios.post('https://burger-queen-api-yrem.herokuapp.com/auth', requestToken);
-  console.log(resp.data.token)
 
   switch (resp.status) {
   case 200:

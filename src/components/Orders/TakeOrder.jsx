@@ -8,9 +8,9 @@ export const TakeOrder = () => {
     userId: "",     //Id usuaria que creó la orden - string
     client: "",     //Clienta para quien se creó la orden - string
     products: [],   //Productos - array
-    status: "",
+    /* status: "",
     dateEntry: new Date(),
-    dateProcessed: new Date()
+    dateProcessed: new Date() */
   }
 
   const [state, setState] = React.useState(initialValues);
@@ -19,7 +19,6 @@ export const TakeOrder = () => {
   }
 
   const handleQty = (id, sign) => {
-    //console.log(id, sign)
     const filtering = state.products.map((item) => {
       if(item._id === id){
         if(sign === "+"){

@@ -2,7 +2,6 @@ import React from 'react';
 import { SummaryProd } from './SummaryProd';
 
 export const Summary = ({state, setState, handleQty, initialValues, handleRemove }) => {
-  //console.log(state)
   const totalSum = (products) => {
     const total = products.reduce((acc, item) => acc + item.price* item.qty, 0);
     return total;
@@ -18,10 +17,14 @@ export const Summary = ({state, setState, handleQty, initialValues, handleRemove
   //   await 
   // }
 
+  //DUDA: tenemos que enviar solo el id del producto? o podemos enviar TODO el array del producto? :(
+    // es que no sale T.T no sé cómo hacer que enviemos solo el id.
+
   const handleSubmit = (e) => {
     e.preventDefault()
     console.log('cliiiiiickkkkk enviar')
-    state.totalPrice = totalSum(state.products)
+    setState(initialValues)
+    // state.totalPrice = totalSum(state.products)
   }
   
   return (
@@ -38,15 +41,11 @@ export const Summary = ({state, setState, handleQty, initialValues, handleRemove
           <h6><u>Precio</u></h6>
         </div>
         <aside>
-          {/* {state.products.map((item) => ( */}
-            <SummaryProd
-              products={state.products}
-              // key={item._id}
-              // item={item}
-              handleQty={handleQty}
-              handleRemove={handleRemove}
-            />
-          {/* ))} */}
+          <SummaryProd
+            products={state.products}
+            handleQty={handleQty}
+            handleRemove={handleRemove}
+          />
           < br />
           {
             state.products.length > 0 ?

@@ -1,32 +1,24 @@
 import React from "react";
-import {
-  productsRequest,
-  deleteProduct,
-  updateProduct,
-} from "../../services/products";
+import {getFn, updateFn, deleteFn} from "../../services/crud";
 import { AdminEachProduct } from "./AdminEachProduct";
 import { ModalAddProduct } from "./ModalAddProduct";
 
 export const AdminProducts = () => {
   const [products, setProducts] = React.useState([]);
+  const storedToken = localStorage.getItem('token');
 
   const getProducts = async () => {
     try {
-      //TRAE TODOS LOS PRODUCTOS AGREGADOS EN EL MODAL ADD PRODUCTS
-      const storedToken = localStorage.getItem("token");
-      const response = await productsRequest(storedToken);
-      console.log(response); // [{dateEntry:xyz, image:xyz, name:xyz, price:xyz, type:xyz, _id: xyz}]
+      const response = await getFn(storedToken, 'products');
       setProducts(response);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const deleteProducts = async (id) => {
-    console.log(id);
+  const deleteProducts = async (obj) => {
     try {
-      const storedToken = localStorage.getItem("token");
-      await deleteProduct(storedToken, id);
+      await deleteFn(storedToken, 'products', obj);
       await getProducts();
     } catch (err) {
       console.log(err);
@@ -37,13 +29,12 @@ export const AdminProducts = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   
-  //--------------- TRAYENDO VALUES DEL MODAL.ADD ---------------
+  //--------------- TRAYENDO VALUES DEL MODAL ---------------
   const initialValues = {
     name: "",
     price: "",
     image: "",
     type: "",
-    //dateEntry: new Date()
   };
   const [values, setValues] = React.useState(initialValues);
   
@@ -53,21 +44,15 @@ export const AdminProducts = () => {
       ? setValues({ ...values, [name]: Number(value) })
       : setValues({ ...values, [name]: value });
   };
-  console.log(values)
-  //--------------------------------------------------------
 
   const updateProducts =(objProduct) => {
-    console.log(objProduct);
     handleShow();
     setValues(objProduct);// muestra los valores al modal
   }
 
   const saveModal = async (newObjProduct) => {
-    try {//newObjectProduct es el objeto 
-      const storedToken = localStorage.getItem("token");
-      await updateProduct(storedToken, newObjProduct);
-      await getProducts();
-      handleClose();
+    try {
+      await updateFn(storedToken, 'products', newObjProduct);
     } catch (err) {
       console.log(err);
     }
@@ -75,6 +60,7 @@ export const AdminProducts = () => {
 
   React.useEffect(() => {
     getProducts();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
   return (
@@ -90,20 +76,20 @@ export const AdminProducts = () => {
           setValues={setValues}
           handleChange={handleChange}
           getProducts={getProducts}
+          storedToken={storedToken}
           show={show}
           handleClose={handleClose}
           saveModal={saveModal}
         />
       </div>
-      <table className="table table-sm table-hover w-100 mt-3 mx-2">
+      <table className="table table-sm  table-hover mt-3 mx-2">
         <thead>
           <tr>
             <th>Nombre</th>
             <th>Tipo</th>
-            <th>Precio</th>
-            <th>Entrada</th>
-            <th></th>
-            <th></th>
+            <th className="text-center">Precio</th>
+            <th className="text-center">Entrada</th>
+            <th>Opciones</th>
           </tr>
         </thead>
         <tbody>
