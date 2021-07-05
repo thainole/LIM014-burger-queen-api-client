@@ -1,5 +1,6 @@
 import React from 'react';
 import { SummaryProd } from './SummaryProd';
+import {postFn} from '../../services/crud'
 
 export const Summary = ({state, setState, handleQty, initialValues, handleRemove }) => {
   const totalSum = (products) => {
@@ -12,12 +13,25 @@ export const Summary = ({state, setState, handleQty, initialValues, handleRemove
     setState({...state, [name] : value})
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log('cliiiiiickkkkk enviar')
-    console.log(state)
-    setState(initialValues)
+  let order = {
+    userId: '60e24d1b393fb400152bef97', // aqui le metemos recién la función que necesitemos para obtener el userId
+    client: state.client,
+    products: state.products.map((item) => ({
+      productId: item.product._id,
+      qty: item.qty
+    }))
   }
+  const dataStore = async(order) => {
+    const storedToken = localStorage.getItem('token');
+    await postFn(storedToken, 'orders', order);
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(order)
+    dataStore(state);
+    setState(initialValues);
+  };
   
   return (
     <form onSubmit={handleSubmit} className="my-1 me-1 pe-1 ms-lg-3 ">

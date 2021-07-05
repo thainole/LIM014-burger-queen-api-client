@@ -5,12 +5,8 @@ import { Summary } from './Summary'
 export const TakeOrder = () => {
 
   const initialValues = {
-    userId: "",     //Id usuaria que creó la orden - string
     client: "",     //Clienta para quien se creó la orden - string
     products: [],   //Productos - array
-    /* status: "",
-    dateEntry: new Date(),
-    dateProcessed: new Date() */
   }
 
   const [state, setState] = React.useState(initialValues);
