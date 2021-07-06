@@ -1,8 +1,8 @@
 import React from 'react';
 import { SummaryProd } from './SummaryProd';
-import {postFn} from '../../services/crud'
+import { postFn } from '../../services/crud'
 
-export const Summary = ({state, setState, handleQty, initialValues, handleRemove }) => {
+export const Summary = ({state, setState, handleQty, initialValues, handleRemove}) => {
   const totalSum = (products) => {
     const total = products.reduce((acc, item) => acc + item.product.price * item.qty, 0);
     return total;
@@ -14,7 +14,7 @@ export const Summary = ({state, setState, handleQty, initialValues, handleRemove
   }
 
   let order = {
-    userId: '60e24d1b393fb400152bef97', // aqui le metemos recién la función que necesitemos para obtener el userId
+    userId: '60e24d1b393fb400152bef97', // falta esto!!
     client: state.client,
     products: state.products.map((item) => ({
       productId: item.product._id,
@@ -29,16 +29,15 @@ export const Summary = ({state, setState, handleQty, initialValues, handleRemove
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(order)
     dataStore();
     setState(initialValues);
   };
   
   return (
-    <form onSubmit={handleSubmit} className="my-1 me-1 pe-1 ms-lg-3 ">
-      <h4>Resumen del pedido</h4>
+    <form onSubmit={handleSubmit} className=" containerSize my-1 pe-2 ms-lg-3 ">
+      <h4 className="w-100 text-center">Resumen del pedido</h4>
       <section className="mb-3 mt-3 d-flex align-items-center">
-        <label htmlFor="clientName" className="form-label me-2 mb-1">Cliente:</label>
+        <label htmlFor="clientName" className="form-label mb-1">Cliente:&nbsp;</label>
         <input type="text" className="form-control" id="clientName" aria-describedby="clientName"
           name="client" onChange={handleInputChange} value={state.client} required />
       </section>
@@ -53,10 +52,9 @@ export const Summary = ({state, setState, handleQty, initialValues, handleRemove
             handleQty={handleQty}
             handleRemove={handleRemove}
           />
-          < br />
           {
             state.products.length > 0 ?
-            <h6>Total:&nbsp;&nbsp;&nbsp;S/. { totalSum(state.products) }</h6>
+            <h6 className="mt-3">Total:&nbsp;&nbsp;&nbsp;S/. { totalSum(state.products) }</h6>
             : <p>No has agregado ningún producto :(</p>
           }
         </aside>

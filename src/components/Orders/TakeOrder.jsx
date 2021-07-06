@@ -1,13 +1,10 @@
 import React from 'react'
-import {Products} from './Products'
+import { Products } from './Products'
 import { Summary } from './Summary'
 
 export const TakeOrder = () => {
 
-  const initialValues = {
-    client: "",     //Clienta para quien se creó la orden - string
-    products: [],   //Productos - array
-  }
+  const initialValues = { client: "", products: [] }
 
   const [state, setState] = React.useState(initialValues);
   const chosenProduct = (product) => {
@@ -16,7 +13,6 @@ export const TakeOrder = () => {
 
   const handleQty = (id, sign) => {
     const filtering = state.products.map((item) => {
-      console.log(item)
       if(item.product._id === id){
         if(sign === "+"){
           return {product:{...item.product}, qty: item.qty +1 }
@@ -28,19 +24,20 @@ export const TakeOrder = () => {
     })
     setState((prev) => ({...prev, products: filtering}))
   }
-  const handleRemove = (id) => {
+  const handleRemove = (e, id) => {
+    e.preventDefault();
     const newList = state.products.filter(item => item.product._id !== id)
     setState((prev) => ({...prev, products: newList}))
   }
 
   return (
-    <section className="container-field p-2 w-100 d-flex justify-content-md-between justify-content-lg-start">
+    <section className="container-field p-2 w-100 d-flex justify-content-around ">
       <Products 
         chosenProduct={chosenProduct}
         state={state}
         handleQty={handleQty}
       />
-      <p className="hr-style m-1" />
+      <p className="hr-style" />
       <Summary 
         state={state}
         setState={setState}

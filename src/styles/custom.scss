@@ -7,6 +7,7 @@ $container-max-widths: (
 );
 
 $white:    #fff !default;
+$grey-hr:     #adb5bd !default;
 $link-color: theme-color("white") !default;
 $link-hover-color: darken($white, 10%) !default;
 $light: #f1f0ea;
@@ -17,6 +18,7 @@ $font-size-lg:                $font-size-base * 1.25 !default;
 $smaller-font:                0.8rem;
 $input-btn-font-size-sm:      0.9rem !default; 
 $input-btn-font-size:         $input-btn-font-size-sm;
+$input-btn-line-height:       1.1 !default;
 /* $h1-font-size:                $font-size-base * 2.5 !default;
 $h2-font-size:                $font-size-base * 2 !default;
 $h3-font-size:                $font-size-base * 1.75 !default;
@@ -47,10 +49,13 @@ a:hover {
 }
 .hr-style{
   border-right: solid 1px ;
-  margin-right: 1rem;
+  color: $grey-hr;
+  margin:0;
   height: 100vh;
 }
-
+.fontSummary {
+  font-size: 0.9rem;
+}
 .containerSize {
   width: 35%;
 } 

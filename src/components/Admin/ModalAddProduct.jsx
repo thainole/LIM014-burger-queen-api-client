@@ -5,7 +5,8 @@ import { postFn } from "../../services/crud";
 export const ModalAddProduct = (props) => {
 
   const createProduct = async () => {
-    await postFn(props.storedToken, 'products', props.values);
+    const storedToken = localStorage.getItem('token');
+    await postFn(storedToken, 'products', props.values);
   };
 
   const sendProduct = async (fn) => {
@@ -20,57 +21,42 @@ export const ModalAddProduct = (props) => {
       <Modal.Header>
         <Modal.Title>{props.values._id ? 'Editar producto' : 'Nuevo producto'}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="px-3 py-4">
         <Form>
-          <Form.Group
-            className="mb-3 d-inline-flex align-items-center w-100"
-            controlId="exampleForm.ControlInput1"
-          >
-            <Form.Label className="me-2">Nombre: </Form.Label>
-            <Form.Control
-              size="sm"
+          <Form.Group className="mb-3 d-inline-flex align-items-center w-100">
+            <Form.Label className="mx-1 mb-1">Nombre: </Form.Label>
+            <Form.Control 
+              className="mx-1"
               type="text"
               name="name"
               value={props.values.name}
               onChange={props.handleChange}
             />
           </Form.Group>
-          <Form.Group
-            className="mb-3 d-inline-flex align-items-center w-100"
-            controlId="exampleForm.ControlInput2"
-          >
-            <Form.Label className="me-4">Precio: </Form.Label>
-            <Form.Control
-              className="w-25 me-3"
-              size="sm"
+          <Form.Group className="mb-3 d-inline-flex align-items-center w-100">
+            <Form.Label className="mx-1 mb-1">Precio: </Form.Label>
+            <Form.Control 
+              className="mx-1"
               type="number"
               min="0"
               name="price"
               value={props.values.price}
               onChange={props.handleChange}
             />
-            <Form.Label className="me-2">Tipo: </Form.Label>
-            <select
-              className="form-select w-50"
-              aria-label="Default select example"
-              name="type"
-              onChange={props.handleChange}
-            >
-              <option>Seleccionar</option>
-              <option value="Desayuno">Desayuno</option>
-              <option value="Hamburguesas">Hamburguesa</option>
-              <option value="Acompañamientos">Acompañamiento</option>
-              <option value="Bebidas">Bebida</option>
-            </select>
+            <Form.Label className="mx-1 mb-1">Tipo: </Form.Label>
+            <Form.Control 
+              as="select" name="type" onChange={props.handleChange} className="mx-1">
+                <option>Seleccionar</option>
+                <option value="Desayuno">Desayuno</option>
+                <option value="Hamburguesas">Hamburguesa</option>
+                <option value="Acompañamientos">Acompañamiento</option>
+                <option value="Bebidas">Bebida</option>
+            </Form.Control>
           </Form.Group>
-          <Form.Group
-            className="mb-3 d-inline-flex align-items-center w-100"
-            controlId="exampleForm.ControlInput3"
-          >
-            <Form.Label className="me-2">Imagen: </Form.Label>
-            <Form.Control
-              className=""
-              size="sm"
+          <Form.Group className="mb-3 d-inline-flex align-items-center w-100">
+            <Form.Label className="mx-1 mb-1">Imagen: </Form.Label>
+            <Form.Control  
+              className="mx-1"
               type="text"
               name="image"
               value={props.values.image}
