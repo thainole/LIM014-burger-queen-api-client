@@ -5,7 +5,8 @@ import { postFn } from "../../services/crud";
 export const ModalAddUsers = (props) => {
 
   const createUser = async () => {
-    await postFn(props.storedToken, 'users', props.values);
+    const storedToken = localStorage.getItem('token');
+    await postFn(storedToken, 'users', props.values);
   }
 
   const sendUser = async (fn) => {
@@ -20,12 +21,12 @@ export const ModalAddUsers = (props) => {
       <Modal.Header>
         <Modal.Title>{props.values._id ? 'Editar usuario' : 'Nuevo usuario'}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className="px-3 py-4">
         <Form>
           <Form.Group className="mb-3 d-inline-flex align-items-center w-100">
-            <Form.Label className="me-2">Email: </Form.Label>
+            <Form.Label className="mx-1 mb-1">Email: </Form.Label>
             <Form.Control
-              size="sm"
+              className="mx-1"
               type="email"
               name="email"
               value={props.values.email}
@@ -33,9 +34,9 @@ export const ModalAddUsers = (props) => {
             />
           </Form.Group>
           <Form.Group className="mb-3 d-inline-flex align-items-center w-100">
-            <Form.Label className="me-2">Contraseña: </Form.Label>
+            <Form.Label className="mx-1 mb-1">Contraseña: </Form.Label>
             <Form.Control
-              size="sm"
+              className="mx-1"
               type="password"
               name="password"
               value={props.values.password}
@@ -43,17 +44,12 @@ export const ModalAddUsers = (props) => {
             />
           </Form.Group>
           <Form.Group className="mb-3 d-inline-flex align-items-center w-100">
-            <Form.Label className="me-2">Administrador: </Form.Label>
-            <select
-              className="form-select"
-              size="sm"
-              aria-label="Default select example"
-              name="roles"
-              onChange={props.handleChange}
-            >
-              <option value="false">False</option> 
-              <option value="true">True</option>               
-            </select>
+            <Form.Label className="mx-1 mb-1">Administrador: </Form.Label>
+            <Form.Control 
+              as="select" name="roles" className="mx-1" onChange={props.handleChange}>
+                <option value="false">False</option> 
+                <option value="true">True</option>               
+            </Form.Control>
           </Form.Group>
         </Form>
       </Modal.Body>

@@ -46,7 +46,7 @@ export const Products = ({chosenProduct, state, handleQty}) => {
   return (
     <section className="containerProd">
       <nav>
-        <ul className="nav d-flex justify-content-between" >
+        <ul className="nav d-flex justify-content-around" >
           <li className="btn me-1 px-2" onClick={() => productsType("Desayuno")}>Desayuno</li>
           <li className="btn me-1 px-2" onClick={() => productsType("Hamburguesas")}>Hamburguesas</li>
           <li className="btn me-1 px-2" onClick={() => productsType("Acompañamientos")}>Acompañamientos</li>

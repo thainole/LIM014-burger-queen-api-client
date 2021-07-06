@@ -12,7 +12,7 @@ export const OrdersNavBar = () => {
 
   return (
     <div>
-      <nav className="navbar-expand-md justify-content-between navbar-light bg-danger d-flex">
+      <nav className="navbar-expand-md justify-content-between navbar-light bg-danger d-flex mb-1">
         <img className="me-auto ms-lg-2 mt-lg-2 ms-md-1 mt-md-1" src={burger} alt="burger" width="40" height="34" />
         <ul className="nav nav-tabs justify-content-end p-0.5">
           <li className="nav-item p-lg-1">

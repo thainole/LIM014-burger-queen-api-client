@@ -1,14 +1,14 @@
 import React from 'react'
-import {ModalAddUsers} from './ModalAddUsers';
-import {getFn, updateFn, deleteFn } from '../../services/crud'
+import { ModalAddUsers } from './ModalAddUsers';
+import { getFn, updateFn, deleteFn } from '../../services/crud'
 
 export const AdminUsers = () => {
 
   const [users, setUsers] = React.useState([])
-  const storedToken = localStorage.getItem('token');
 
   const getUsers = async() => {
     try {
+      const storedToken = localStorage.getItem('token');
       const response = await getFn(storedToken, 'users');
       setUsers(response) ;
     }
@@ -19,11 +19,11 @@ export const AdminUsers = () => {
 
   React.useEffect(() => {
     getUsers();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const deleteUsers = async(obj) => {
     try { 
+      const storedToken = localStorage.getItem('token');
       await deleteFn(storedToken, 'users', obj);
       await getUsers();
     }
@@ -55,11 +55,11 @@ export const AdminUsers = () => {
 
   const updateUserModal =(objUser) => {
     handleShow();
-    setValues(objUser);// muestra los valores al modal
+    setValues(objUser);
   }
 
   const saveModal = async (newObjUser) => {
-    try {//newObjectProduct es el objeto 
+    try { 
       const storedToken = localStorage.getItem("token");
       await updateFn(storedToken, 'users', newObjUser);
     } catch (err) {
@@ -83,7 +83,6 @@ export const AdminUsers = () => {
           handleChange={handleChange} 
           show={show}
           handleClose={handleClose}
-          storedToken={storedToken}
           saveModal={saveModal}
         />
       </div>

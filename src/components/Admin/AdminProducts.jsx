@@ -1,14 +1,14 @@
 import React from "react";
-import {getFn, updateFn, deleteFn} from "../../services/crud";
+import { getFn, updateFn, deleteFn } from "../../services/crud";
 import { AdminEachProduct } from "./AdminEachProduct";
 import { ModalAddProduct } from "./ModalAddProduct";
 
 export const AdminProducts = () => {
   const [products, setProducts] = React.useState([]);
-  const storedToken = localStorage.getItem('token');
-
+  
   const getProducts = async () => {
     try {
+      const storedToken = localStorage.getItem('token');
       const response = await getFn(storedToken, 'products');
       setProducts(response);
     } catch (err) {
@@ -18,6 +18,7 @@ export const AdminProducts = () => {
 
   const deleteProducts = async (obj) => {
     try {
+      const storedToken = localStorage.getItem('token');
       await deleteFn(storedToken, 'products', obj);
       await getProducts();
     } catch (err) {
@@ -52,6 +53,7 @@ export const AdminProducts = () => {
 
   const saveModal = async (newObjProduct) => {
     try {
+      const storedToken = localStorage.getItem('token');
       await updateFn(storedToken, 'products', newObjProduct);
     } catch (err) {
       console.log(err);
@@ -60,7 +62,6 @@ export const AdminProducts = () => {
 
   React.useEffect(() => {
     getProducts();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   
   return (
@@ -76,7 +77,6 @@ export const AdminProducts = () => {
           setValues={setValues}
           handleChange={handleChange}
           getProducts={getProducts}
-          storedToken={storedToken}
           show={show}
           handleClose={handleClose}
           saveModal={saveModal}
