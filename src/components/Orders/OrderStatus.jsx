@@ -3,7 +3,7 @@ import { Cards } from './Cards'
 import { getFn } from '../../services/crud'
 
 export const OrderStatus = () => {
-  
+
   const [orders, setOrders] = React.useState([]);
 
   const getOrders = async() => {
@@ -20,6 +20,7 @@ export const OrderStatus = () => {
   React.useEffect(() => {
     getOrders();
   }, []);
+
 
   return (
     <div className="container-field d-flex flexWrap p-2 w-100">

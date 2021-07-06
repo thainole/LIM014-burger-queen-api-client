@@ -24,7 +24,7 @@ export const TakeOrder = () => {
     })
     setState((prev) => ({...prev, products: filtering}))
   }
-  
+
   const handleRemove = (e, id) => {
     e.preventDefault();
     const newList = state.products.filter(item => item.product._id !== id)

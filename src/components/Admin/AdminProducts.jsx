@@ -8,6 +8,7 @@ export const AdminProducts = () => {
   const [products, setProducts] = React.useState([]);
   
   //---------------- RENDERIZANDO PRODUCTOS ------------------
+
   const getProducts = async () => {
     try {
       const storedToken = localStorage.getItem('token');

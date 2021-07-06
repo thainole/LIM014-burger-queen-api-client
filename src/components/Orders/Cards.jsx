@@ -11,14 +11,14 @@ export const Cards = ({order, getOrders}) => {
   const setUser = () => {
     const decodedToken = jwtDecode.default(storedToken);
     return decodedToken.email
-  }
+  };
 
   const sendingMeal = async(newStatus) => {
     order.status = newStatus;
     // eslint-disable-next-line no-unused-expressions
     order.status === 'delivered' ? order.dateProcessed = new Date() : null
     await updateFn(storedToken, 'orders', order);
-    await getOrders()
+    await getOrders();
   };
   
   const deleteOrder = async (obj) => {
