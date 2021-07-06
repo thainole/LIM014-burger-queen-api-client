@@ -1,10 +1,14 @@
 import React from 'react';
 import { SummaryProd } from './SummaryProd';
+import { postFn } from '../../services/crud'
+import { ModalOrderSent } from './ModalOrderSent';
 
-export const Summary = ({state, setState, handleQty, initialValues, /* handleRemove */}) => {
-  
-  const totalSum = products => {
-    const total = products.reduce((acc, item) => acc + item.price* item.amount, 0);
+const jwtDecode = require('jwt-decode')
+
+export const Summary = ({state, setState, handleQty, initialValues, handleRemove}) => {
+
+  const totalSum = (products) => {
+    const total = products.reduce((acc, item) => acc + item.product.price * item.qty, 0);
     return total;
   }
 
@@ -13,75 +17,83 @@ export const Summary = ({state, setState, handleQty, initialValues, /* handleRem
     setState({...state, [name] : value})
   }
 
-  //const dataStore
+  const setUserId = () => {
+    const storedToken = localStorage.getItem('token');
+    const decodedToken = jwtDecode.default(storedToken);
+    return decodedToken.uid
+  }
+
+  let order = {
+    userId: setUserId(),
+    client: state.client,
+    products: state.products.map((item) => ({
+      productId: item.product._id,
+      qty: item.qty
+    }))
+  }
+
+  const dataStore = async() => {
+    const storedToken = localStorage.getItem('token');
+    await postFn(storedToken, 'orders', order);
+  }
+
+  const [show, setShow] = React.useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log('cliiiiiickkkkk enviar')
-   // state.totalPrice = totalSum(state.products)
-  }
+    e.preventDefault();
+    dataStore();
+    setState(initialValues);
+    handleShow();
+  };
+  
   
   return (
-<form className="orderList" onSubmit={handleSubmit}>
-      <h3>Resumen del pedido</h3>
-      <section className="customerInfo">
-        <p>Cliente : </p>
-        <input
-          type="text"
-          name="client"
-          onChange={handleInputChange}
-          value={state.client}
-          required
-        />
-        {/* <p>Mesero: </p>
-        <input
-          type="text"
-          name="server"
-          onChange={handleInputChange}
-          value={state.server}
-          required
-        /> */}
+    <form onSubmit={handleSubmit} className=" containerSize my-1 pe-2 ms-lg-3 ">
+      <h4 className="w-100 text-center">Resumen del pedido</h4>
+      <section className="mb-3 mt-3 d-flex align-items-center">
+        <label htmlFor="clientName" className="form-label mb-1">Cliente:&nbsp;</label>
+        <input type="text" className="form-control" id="clientName" aria-describedby="clientName"
+          name="client" onChange={handleInputChange} value={state.client} required />
       </section>
-      <section className="orderDetails">
-        <div className="titles">
-          <h4>Productos</h4>
-          <h4>Precio</h4>
+      <section>
+        <div className="d-flex justify-content-between">
+          <h6><u>Productos</u></h6>
+          <h6><u>Precio</u></h6>
         </div>
-        <aside className="sumary">
-          {state.products.map((item) => (
-            <SummaryProd
-              key={item._id}
-              item={item}
-              handleQty={handleQty}
-              //handleRemove={handleRemove}
-            />
-          ))}
+        <aside>
+          <SummaryProd
+            products={state.products}
+            handleQty={handleQty}
+            handleRemove={handleRemove}
+          />
           {
             state.products.length > 0 ?
-            <h3 className="h3">Total:&nbsp;&nbsp;&nbsp;S/. {totalSum(state.products)}</h3>
-            : <h5>No has agregado ningún producto :(</h5>
+            <h6 className="mt-3">Total:&nbsp;&nbsp;&nbsp;S/. { totalSum(state.products) }</h6>
+            : <p className="m-md-3 m-lg-5 text-center"><em>No has agregado ningún producto</em></p>
           }
-
         </aside>
       </section>
       <div>
         {
-           state.products.length > 0 ?
-           <>
-            <button className="submitButton grey"
+          state.products.length > 0 ?
+          <div className="d-flex justify-content-around mt-3">
+            <button className="btn btn-secondary"
               onClick={e=> {
                 e.preventDefault()
                 setState(initialValues)
               }}>
               Borrar orden
             </button>
-            <button className="submitButton" >
+            <button className="btn btn-danger">
               Enviar a cocina
             </button>
-          </>
-         : ''
+          </div>
+        : ''
         }
       </div>
+      <ModalOrderSent show={show} handleClose={handleClose}/>
     </form>
   )
 }

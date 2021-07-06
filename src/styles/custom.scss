@@ -1,6 +1,3 @@
-// Revisar el archivo node_modules\bootstrap\scss\_variables.scss
-// @import "../node_modules/bootstrap/scss/bootstrap.scss";
-
 $container-max-widths: (
   sm: 540px,
   md: 780px,
@@ -8,10 +5,11 @@ $container-max-widths: (
   xl: 1140px,
   xxl: 1320px
 );
+
 $white:    #fff !default;
-$nav-link-color: null $white;
-$nav-link-hover-color: null $white;
-// #eceae2 #f1f0ea
+$grey-hr:     #adb5bd !default;
+$link-color: theme-color("white") !default;
+$link-hover-color: darken($white, 10%) !default;
 $light: #f1f0ea;
 
 $font-size-base:              1rem !default; // Assumes the browser default, typically `16px`
@@ -20,6 +18,7 @@ $font-size-lg:                $font-size-base * 1.25 !default;
 $smaller-font:                0.8rem;
 $input-btn-font-size-sm:      0.9rem !default; 
 $input-btn-font-size:         $input-btn-font-size-sm;
+$input-btn-line-height:       1.1 !default;
 /* $h1-font-size:                $font-size-base * 2.5 !default;
 $h2-font-size:                $font-size-base * 2 !default;
 $h3-font-size:                $font-size-base * 1.75 !default;
@@ -27,21 +26,36 @@ $h4-font-size:                $font-size-base * 1.5 !default;
 $h5-font-size:                $font-size-base * 1.25 !default;
 $h6-font-size:                $font-size-base !default; */
 
+a {
+  color: $white;
+  text-decoration: none;
+  background-color: transparent;
+}
+a:hover {
+  color:  $white;
+  text-decoration: underline;
+}
 .cardsWidth {
   width: 8rem;
   font-size: $smaller-font;
 }
-
+.ordersWidth {
+  width: 13rem;
+  font-size: $smaller-font;
+}
 .imgCardSize {
   padding: 0.3rem;
   height: 6.5rem;
 }
 .hr-style{
   border-right: solid 1px ;
-  margin-right: 1rem;
+  color: $grey-hr;
+  margin:0;
   height: 100vh;
 }
-
+.fontSummary {
+  font-size: 0.9rem;
+}
 .containerSize {
   width: 35%;
 } 

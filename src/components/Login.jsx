@@ -4,6 +4,7 @@ import { getToken } from '../services/auth.js';
 import { useHistory } from "react-router-dom";
 
 export const Login = () => {
+  
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
@@ -16,7 +17,6 @@ export const Login = () => {
 
   const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(user);
     try {
       const response = await getToken(user);
       changingPage(response);
@@ -27,10 +27,11 @@ export const Login = () => {
   };
 
   const changingPage = (response) => {
-    console.log(response)
-    response.userRol.admin === true
+    response.roles.admin === true
     ? history.push("/admin/usuarios")
-    : history.push("/pedidos/hacer-pedidos")
+    : response.email === 'chef@bq.com' 
+      ? history.push("/pedidos/cocina")
+      : history.push("/pedidos/hacer-pedidos")
   }
 
   return (
