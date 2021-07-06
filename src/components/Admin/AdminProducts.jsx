@@ -23,7 +23,6 @@ export const AdminProducts = () => {
     getProducts();
   }, []);
 
-  
   //-------------------- SETTEO PARA MODAL ---------------------
   const [show, setShow] = React.useState(false);
   const handleClose = () => setShow(false);

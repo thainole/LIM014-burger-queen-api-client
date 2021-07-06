@@ -2,6 +2,7 @@ import React from 'react';
 import moment from 'moment';
 
 export const AdminEachProduct = ({product, deleteProducts, updateProducts}) => {
+
   return (
     <tr>
       <td>{product.name}</td>

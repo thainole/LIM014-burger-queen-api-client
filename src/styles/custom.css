@@ -4,6 +4,7 @@ $h3-font-size:                $font-size-base * 1.75 !default;
 $h4-font-size:                $font-size-base * 1.5 !default;
 $h5-font-size:                $font-size-base * 1.25 !default;
 $h6-font-size:                $font-size-base !default; */
+
 a {
   color: #fff;
   text-decoration: none;
@@ -772,6 +773,7 @@ pre code {
 
 .col-6 {
   -webkit-box-flex: 0;
+
       -ms-flex: 0 0 50%;
           flex: 0 0 50%;
   max-width: 50%;
@@ -3574,6 +3576,7 @@ input[type="button"].btn-block {
 }
 
 @media (min-width: 992px) {
+
   .dropdown-menu-lg-left {
     right: auto;
     left: 0;
