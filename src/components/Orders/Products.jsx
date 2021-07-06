@@ -7,6 +7,7 @@ export const Products = ({chosenProduct, state, handleQty}) => {
   const [products, setProducts] = React.useState([])
   const [list, setList] = React.useState([]);
 
+  //------------------- RENDERIZANDO PRODUCTOS ----------------------
   const getProducts = async() => {
     try {
       const storedToken = localStorage.getItem('token');
@@ -24,7 +25,7 @@ export const Products = ({chosenProduct, state, handleQty}) => {
     getProducts();
   }, [])
  
-
+  //------------------- SUB MENÚ DE PRODUCTOS ----------------------
   const productsType = (option) => {
     // eslint-disable-next-line default-case
     switch (option) {
@@ -42,6 +43,7 @@ export const Products = ({chosenProduct, state, handleQty}) => {
         return setList(drinks);
     }
   }; 
+  
   
   return (
     <section className="containerProd">

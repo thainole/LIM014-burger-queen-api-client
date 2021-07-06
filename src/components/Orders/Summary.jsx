@@ -1,8 +1,12 @@
 import React from 'react';
 import { SummaryProd } from './SummaryProd';
 import { postFn } from '../../services/crud'
+import { ModalOrderSent } from './ModalOrderSent';
+
+const jwtDecode = require('jwt-decode')
 
 export const Summary = ({state, setState, handleQty, initialValues, handleRemove}) => {
+
   const totalSum = (products) => {
     const total = products.reduce((acc, item) => acc + item.product.price * item.qty, 0);
     return total;
@@ -13,8 +17,14 @@ export const Summary = ({state, setState, handleQty, initialValues, handleRemove
     setState({...state, [name] : value})
   }
 
+  const setUserId = () => {
+    const storedToken = localStorage.getItem('token');
+    const decodedToken = jwtDecode.default(storedToken);
+    return decodedToken.uid
+  }
+
   let order = {
-    userId: '60e24d1b393fb400152bef97', // falta esto!!
+    userId: setUserId(),
     client: state.client,
     products: state.products.map((item) => ({
       productId: item.product._id,
@@ -27,11 +37,17 @@ export const Summary = ({state, setState, handleQty, initialValues, handleRemove
     await postFn(storedToken, 'orders', order);
   }
 
+  const [show, setShow] = React.useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dataStore();
     setState(initialValues);
+    handleShow();
   };
+  
   
   return (
     <form onSubmit={handleSubmit} className=" containerSize my-1 pe-2 ms-lg-3 ">
@@ -55,7 +71,7 @@ export const Summary = ({state, setState, handleQty, initialValues, handleRemove
           {
             state.products.length > 0 ?
             <h6 className="mt-3">Total:&nbsp;&nbsp;&nbsp;S/. { totalSum(state.products) }</h6>
-            : <p>No has agregado ningún producto :(</p>
+            : <p className="m-md-3 m-lg-5 text-center"><em>No has agregado ningún producto</em></p>
           }
         </aside>
       </section>
@@ -77,6 +93,7 @@ export const Summary = ({state, setState, handleQty, initialValues, handleRemove
         : ''
         }
       </div>
+      <ModalOrderSent show={show} handleClose={handleClose}/>
     </form>
   )
 }

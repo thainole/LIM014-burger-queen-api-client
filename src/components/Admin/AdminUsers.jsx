@@ -5,7 +5,8 @@ import { getFn, updateFn, deleteFn } from '../../services/crud'
 export const AdminUsers = () => {
 
   const [users, setUsers] = React.useState([])
-
+  
+  //---------------- RENDERIZANDO USUARIOS ------------------
   const getUsers = async() => {
     try {
       const storedToken = localStorage.getItem('token');
@@ -21,17 +22,11 @@ export const AdminUsers = () => {
     getUsers();
   }, [])
 
-  const deleteUsers = async(obj) => {
-    try { 
-      const storedToken = localStorage.getItem('token');
-      await deleteFn(storedToken, 'users', obj);
-      await getUsers();
-    }
-    catch (err) {
-      console.log(err)
-    }
-  }
-
+  //-------------------- SETTEO PARA MODAL ---------------------
+  const [show, setShow] = React.useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  
   const initialValues = {
     email: "",
     password: "",
@@ -39,10 +34,6 @@ export const AdminUsers = () => {
       admin: false,
     }
   };
-  
-  const [show, setShow] = React.useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   const [values, setValues] = React.useState(initialValues);
 
@@ -66,6 +57,18 @@ export const AdminUsers = () => {
       console.log(err);
     }
   };
+
+  const deleteUsers = async(obj) => {
+    try { 
+      const storedToken = localStorage.getItem('token');
+      await deleteFn(storedToken, 'users', obj);
+      await getUsers();
+    }
+    catch (err) {
+      console.log(err)
+    }
+  };
+  
 
   return (
     <div>

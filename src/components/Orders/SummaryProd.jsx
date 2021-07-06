@@ -2,10 +2,11 @@ import React from 'react';
 
 export const SummaryProd = ({products, handleQty, handleRemove}) => {
 
-  const handleItem = (e, item, sign) =>{
+  const handleItem = (e, item, sign) => {
     e.preventDefault();
     handleQty(item.product._id, sign)
-  }
+  };
+  
   return (
     <>
       { products.map((item) =>(

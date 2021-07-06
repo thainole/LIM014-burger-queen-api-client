@@ -5,7 +5,7 @@ const axios = require('axios');
 const getFn = async (token, keyword) => {
   const resp = await axios({
     method: 'get',
-    url: `https://burger-queen-api-yrem.herokuapp.com/${keyword}`,
+    url: `https://burger-queen-api-yrem.herokuapp.com/${keyword}?limit=20&page=1`,
     headers: {
       'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,

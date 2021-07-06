@@ -4,13 +4,56 @@ import { AdminEachProduct } from "./AdminEachProduct";
 import { ModalAddProduct } from "./ModalAddProduct";
 
 export const AdminProducts = () => {
+
   const [products, setProducts] = React.useState([]);
   
+  //---------------- RENDERIZANDO PRODUCTOS ------------------
+
   const getProducts = async () => {
     try {
       const storedToken = localStorage.getItem('token');
       const response = await getFn(storedToken, 'products');
       setProducts(response);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  React.useEffect(() => {
+    getProducts();
+  }, []);
+
+  
+  //-------------------- SETTEO PARA MODAL ---------------------
+  const [show, setShow] = React.useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+  
+  const initialValues = {
+    name: "",
+    price: "",
+    image: "",
+    type: "",
+  };
+  
+  const [values, setValues] = React.useState(initialValues);
+  
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    name === "price"
+      ? setValues({ ...values, [name]: Number(value) })
+      : setValues({ ...values, [name]: value });
+  };
+
+  const updateProducts =(objProduct) => {
+    handleShow();
+    setValues(objProduct);
+  }
+
+  const saveModal = async (newObjProduct) => {
+    try {
+      const storedToken = localStorage.getItem('token');
+      await updateFn(storedToken, 'products', newObjProduct);
     } catch (err) {
       console.log(err);
     }
@@ -25,45 +68,8 @@ export const AdminProducts = () => {
       console.log(err);
     }
   };
-  //---------------------- SETTEO MODAL ---------------------
-  const [show, setShow] = React.useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-  
-  //--------------- TRAYENDO VALUES DEL MODAL ---------------
-  const initialValues = {
-    name: "",
-    price: "",
-    image: "",
-    type: "",
-  };
-  const [values, setValues] = React.useState(initialValues);
-  
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    name === "price"
-      ? setValues({ ...values, [name]: Number(value) })
-      : setValues({ ...values, [name]: value });
-  };
 
-  const updateProducts =(objProduct) => {
-    handleShow();
-    setValues(objProduct);// muestra los valores al modal
-  }
 
-  const saveModal = async (newObjProduct) => {
-    try {
-      const storedToken = localStorage.getItem('token');
-      await updateFn(storedToken, 'products', newObjProduct);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  React.useEffect(() => {
-    getProducts();
-  }, []);
-  
   return (
     <section className="container-fluid p-3 w-100 col">
       <h3 className="w-100 text-center ">Lista de productos</h3>

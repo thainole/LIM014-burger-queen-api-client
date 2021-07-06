@@ -9,7 +9,7 @@ export const EachProduct = ({product, chosenProduct, state, handleQty}) => {
     } else {
       return chosenProduct({product:{...product}, qty: 1  });
     }
-  }
+  };
 
   return (
     <div className="card cardsWidth m-2" >  
